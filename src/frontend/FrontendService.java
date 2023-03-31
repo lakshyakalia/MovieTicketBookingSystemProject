@@ -37,7 +37,15 @@ public class FrontendService implements FrontendInterface{
             DatagramPacket recievePacketTwo=new DatagramPacket(recieveByteTwo,recieveByteTwo.length);
             socketForReplicaOne.receive(recievePacketOne);
             socketForReplicaTwo.receive(recievePacketTwo);
-            response=new String(recievePacketOne.getData()).trim() + " "+ new String(recievePacketTwo.getData()).trim();
+
+            //Response from four replicas
+            String resReplicaOne=new String(recievePacketOne.getData()).trim();
+            String resReplicaTwo=new String(recievePacketTwo.getData()).trim();
+            String resReplicaThree=resReplicaOne;
+            String resReplicaFour=resReplicaTwo;
+            String checkSoftwareFailure=checkResponsesFromReplicas(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
+
+            response="This is a final response to the client";
             socketForReplicaOne.close();
             socketForReplicaTwo.close();
             socket.close();
@@ -47,6 +55,21 @@ public class FrontendService implements FrontendInterface{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public String checkResponsesFromReplicas(String resReplicaOne,String resReplicaTwo, String resReplicaThree,String resReplicaFour){
+        String noFailure="No failure";
+        int countNotEqualResponseOne=0;
+        if(!resReplicaOne.equals(resReplicaTwo)){
+            countNotEqualResponseOne++;
+        }
+        else if(!resReplicaOne.equals(resReplicaThree)){
+            countNotEqualResponseOne++;
+        }
+        else if(!resReplicaOne.equals(resReplicaFour)){
+            countNotEqualResponseOne++;
+        }
+        return "";
+
     }
     public String getRequestFromClient(RequestObject requestObject){
         return null;
