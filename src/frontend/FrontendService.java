@@ -43,6 +43,7 @@ public class FrontendService implements FrontendInterface{
             String resReplicaTwo=new String(recievePacketTwo.getData()).trim();
             String resReplicaThree=resReplicaOne;
             String resReplicaFour=resReplicaTwo;
+
             String checkSoftwareFailure=checkResponsesFromReplicas(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
 
             response="This is a final response to the client";
@@ -58,15 +59,15 @@ public class FrontendService implements FrontendInterface{
     }
     public String checkResponsesFromReplicas(String resReplicaOne,String resReplicaTwo, String resReplicaThree,String resReplicaFour){
         String noFailure="No failure";
-        int countNotEqualResponseOne=0;
-        if(!resReplicaOne.equals(resReplicaTwo)){
-            countNotEqualResponseOne++;
+        int countEqualResponseOne=0;
+        if(resReplicaOne.equals(resReplicaTwo)){
+            countEqualResponseOne++;
         }
-        else if(!resReplicaOne.equals(resReplicaThree)){
-            countNotEqualResponseOne++;
+        if(resReplicaOne.equals(resReplicaThree)){
+            countEqualResponseOne++;
         }
-        else if(!resReplicaOne.equals(resReplicaFour)){
-            countNotEqualResponseOne++;
+        if(resReplicaOne.equals(resReplicaFour)){
+            countEqualResponseOne++;
         }
         return "";
 
