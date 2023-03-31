@@ -11,6 +11,11 @@ import java.net.*;
 @WebService(endpointInterface="frontend.FrontendInterface")
 @SOAPBinding(style = Style.RPC)
 public class FrontendService implements FrontendInterface{
+    int replicaOneFaultCount=0;
+    int replicaTwoFaultCount=0;
+    int replicaThreeFaultCount=0;
+    int replicaFourFaultCount=0;
+
 
     @Override
     public String forwardMessageToSequencer(String message) {
@@ -45,8 +50,28 @@ public class FrontendService implements FrontendInterface{
             String resReplicaFour=resReplicaTwo;
 
             String checkSoftwareFailure=checkResponsesFromReplicas(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
+            String[] arr=checkSoftwareFailure.split(";");
+            response=arr[0];
+            String error=arr[1];
+            if(replicaOneFaultCount==3){
+                replicaOneFaultCount=0;
+                sendReplicaReplaceRequest(1);
+            }
+            else if(replicaTwoFaultCount==3){
+                replicaTwoFaultCount=0;
+                sendReplicaReplaceRequest(2);
+            }
+            else if(replicaThreeFaultCount==3){
+                replicaThreeFaultCount=0;
+                sendReplicaReplaceRequest(3);
+            }
+            else if(replicaFourFaultCount==3){
+                replicaFourFaultCount=0;
+                sendReplicaReplaceRequest(4);
+            }
 
-            response="This is a final response to the client";
+
+//            response="This is a final response to the client";
             socketForReplicaOne.close();
             socketForReplicaTwo.close();
             socket.close();
@@ -58,21 +83,51 @@ public class FrontendService implements FrontendInterface{
         }
     }
     public String checkResponsesFromReplicas(String resReplicaOne,String resReplicaTwo, String resReplicaThree,String resReplicaFour){
-        String noFailure="No failure";
-        int countEqualResponseOne=0;
-        if(resReplicaOne.equals(resReplicaTwo)){
-            countEqualResponseOne++;
+        String result="";
+        String error="";
+        String[] arr=new String[4];
+        arr[0]=resReplicaOne;
+        arr[1]=resReplicaTwo;
+        arr[2]=resReplicaThree;
+        arr[3]=resReplicaFour;
+        int flag = 0;
+        for(int i=0;i<4;i++){
+            for(int j=i+1;j<4;j++){
+                if(!arr[i].equals(arr[j])){
+                    flag++;
+                }
+                if(flag==2){
+                    error= arr[i];
+                    break;
+                }
+            }
+            if(flag==0){
+                result = arr[i];
+            }
         }
-        if(resReplicaOne.equals(resReplicaThree)){
-            countEqualResponseOne++;
+        if(error.equals(resReplicaOne)){
+            replicaOneFaultCount++;
+            error="ReplicaOne";
         }
-        if(resReplicaOne.equals(resReplicaFour)){
-            countEqualResponseOne++;
+        else if(error.equals(resReplicaTwo)){
+            replicaTwoFaultCount++;
+            error="ReplicaTwo";
         }
-        return "";
-
+        else if(error.equals(resReplicaThree)){
+            replicaThreeFaultCount++;
+            error="ReplicaThree";
+        }
+        else if(error.equals(resReplicaFour)){
+            replicaFourFaultCount++;
+            error="ReplicaFour";
+        }
+        String res = result+";"+error;
+        return res;
     }
     public String getRequestFromClient(RequestObject requestObject){
+        return null;
+    }
+    public String sendReplicaReplaceRequest(int replicaNumber){
         return null;
     }
 }
