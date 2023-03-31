@@ -11,29 +11,35 @@ import java.net.*;
 public class FrontendService implements FrontendInterface{
 
     @Override
-    public void forwardMessageToSequencer(String message) {
-        sendMessageToSequencer(message);
-        return;
+    public String forwardMessageToSequencer(String message) {
+        return sendMessageToSequencer(message);
     }
 
-    public void sendMessageToSequencer(String message){
+    public String sendMessageToSequencer(String message){
         try{
             //send a message via UDP
-            DatagramSocket socket=new DatagramSocket();
+            DatagramSocket socket=new DatagramSocket(4455);
             String messageToSend=message;
             byte[] byteMessage=messageToSend.getBytes();
             InetAddress ia=InetAddress.getLocalHost();
             DatagramPacket packet=new DatagramPacket(byteMessage,byteMessage.length,ia,4822);
             socket.send(packet);
-            String response="";
 
             //recieve a message via UDP
-            byte [] recieveByte=new byte[1024];
-            DatagramPacket recievePacket=new DatagramPacket(recieveByte,recieveByte.length);
-            socket.receive(recievePacket);
-            response=new String(recievePacket.getData()).trim();
+            DatagramSocket socketForReplicaOne=new DatagramSocket(5122);
+            DatagramSocket socketForReplicaTwo=new DatagramSocket(5123);
+            String response="";
+            byte [] recieveByteOne=new byte[1024];
+            byte [] recieveByteTwo=new byte[1024];
+            DatagramPacket recievePacketOne=new DatagramPacket(recieveByteOne,recieveByteOne.length);
+            DatagramPacket recievePacketTwo=new DatagramPacket(recieveByteTwo,recieveByteTwo.length);
+            socketForReplicaOne.receive(recievePacketOne);
+            socketForReplicaTwo.receive(recievePacketTwo);
+            response=new String(recievePacketOne.getData()).trim() + " "+ new String(recievePacketTwo.getData()).trim();
+            socketForReplicaOne.close();
+            socketForReplicaTwo.close();
             socket.close();
-            return;
+            return response;
         } catch (SocketException | UnknownHostException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {

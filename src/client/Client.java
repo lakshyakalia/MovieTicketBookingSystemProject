@@ -14,6 +14,6 @@ public class Client  {
         QName qName=new QName("http://frontend/","FrontendServiceService");
         Service service= Service.create(url,qName);
         FrontendInterface frontendInterface=service.getPort(FrontendInterface.class);
-        frontendInterface.forwardMessageToSequencer("Hello Message");
+        System.out.println("This is a result "+frontendInterface.forwardMessageToSequencer("Hello Message"));
     }
 }

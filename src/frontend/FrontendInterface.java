@@ -7,5 +7,7 @@ import javax.jws.soap.SOAPBinding.Style;
 @WebService
 @SOAPBinding(style = Style.RPC)
 public interface FrontendInterface {
-    public void forwardMessageToSequencer(String message);
+    public String forwardMessageToSequencer(String message);
+
+//    public String recieveFromReplicaManager();
 }
