@@ -1,11 +1,13 @@
 package sequencer;
 
+import constants.Constants;
+
 import java.io.IOException;
 import java.net.*;
 
 public class Sequencer {
     public static void main(String[] args) throws IOException {
-        DatagramSocket socket=new DatagramSocket(4822);
+        DatagramSocket socket=new DatagramSocket(Constants.sequencerPort);
         System.out.println("Sequencer Started");
         while(true){
             requestHandler(socket);
@@ -30,7 +32,7 @@ public class Sequencer {
         InetAddress group=InetAddress.getByName("230.0.0.0");
         byte[] messageToSend=new byte[1024];
         messageToSend=request.getBytes();
-        DatagramPacket packet=new DatagramPacket(messageToSend,messageToSend.length,group,4400);
+        DatagramPacket packet=new DatagramPacket(messageToSend,messageToSend.length,group,Constants.multicastPort);
         multicastSocket.send(packet);
         multicastSocket.close();
     }

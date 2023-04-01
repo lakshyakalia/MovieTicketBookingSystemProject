@@ -39,6 +39,7 @@ public class Client  {
         boolean isAdmin = checkAdmin(userID);
 //        String serverPort = getServerPort(userID);
         requestObject.currentUser = userID;
+        String response="";
 
         if(isAdmin){
 
@@ -84,10 +85,11 @@ public class Client  {
                         requestObject.movieName = addMovieName;
                         requestObject.bookingCapacity = addBookingCapacity;
                         requestObject.requestType = "addMovieSlots";
-                        frontendInterface.getRequestFromClient(requestObject);
+                        response=frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.addMovieSlots(addMovieID, addMovieName, addBookingCapacity);
 //                        writeToLogFile("addMovieSlots",userID+" "+addMovieID+" "+addMovieName+" "+addBookingCapacity,res);
 //                        System.out.println(res);
+                        System.out.println(response+" Hi!!!!");
                         break;
                     }
                     case 2:

@@ -1,5 +1,6 @@
 package frontend;
 
+import constants.Constants;
 import models.RequestObject;
 
 import javax.jws.WebService;
@@ -24,17 +25,21 @@ public class FrontendService implements FrontendInterface{
 
     public String sendMessageToSequencer(String message){
         try{
-            //send a message via UDP
-            DatagramSocket socket=new DatagramSocket(4455);
+            //send a message via UDP to a sequencer
+            DatagramSocket socket=new DatagramSocket(Constants.frontendPort);
             String messageToSend=message;
             byte[] byteMessage=messageToSend.getBytes();
             InetAddress ia=InetAddress.getLocalHost();
-            DatagramPacket packet=new DatagramPacket(byteMessage,byteMessage.length,ia,4822);
+            DatagramPacket packet=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.sequencerPort);
             socket.send(packet);
 
-            //recieve a message via UDP
-            DatagramSocket socketForReplicaOne=new DatagramSocket(5122);
-            DatagramSocket socketForReplicaTwo=new DatagramSocket(5123);
+            //recieve a message via UDP from the replicas
+
+            //socket to communicate with replica1
+            DatagramSocket socketForReplicaOne=new DatagramSocket(Constants.listenReplicaOnePort);
+            //socket to communicate with replica2
+            DatagramSocket socketForReplicaTwo=new DatagramSocket(Constants.listenReplicaTwoPort);
+
             String response="";
             byte [] recieveByteOne=new byte[1024];
             byte [] recieveByteTwo=new byte[1024];
@@ -70,8 +75,7 @@ public class FrontendService implements FrontendInterface{
                 sendReplicaReplaceRequest(4);
             }
 
-
-//            response="This is a final response to the client";
+            response=checkSoftwareFailure +" "+resReplicaOne+" "+resReplicaTwo;
             socketForReplicaOne.close();
             socketForReplicaTwo.close();
             socket.close();
@@ -129,5 +133,6 @@ public class FrontendService implements FrontendInterface{
     }
     public String sendReplicaReplaceRequest(int replicaNumber){
         return null;
+//        return forwardMessageToSequencer("Hello");
     }
 }
