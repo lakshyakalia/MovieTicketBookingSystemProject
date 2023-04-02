@@ -12,10 +12,16 @@ import java.net.*;
 @WebService(endpointInterface="frontend.FrontendInterface")
 @SOAPBinding(style = Style.RPC)
 public class FrontendService implements FrontendInterface{
-    int replicaOneFaultCount=0;
-    int replicaTwoFaultCount=0;
-    int replicaThreeFaultCount=0;
-    int replicaFourFaultCount=0;
+    static int bugCountRmOne=0;
+    static int bugCountRmTwo=0;
+    static int bugCountRmThree=0;
+    static int bugCountRmFour=0;
+
+    static boolean faultReplicaOne=false;
+    static boolean faultReplicaTwo=false;
+    static boolean faultReplicaThree=false;
+    static boolean faultReplicaFour=false;
+
 
 
     @Override
@@ -34,18 +40,32 @@ public class FrontendService implements FrontendInterface{
             socket.send(packet);
 
             //recieve a message via UDP from the replicas
-
             //socket to communicate with replica1
             DatagramSocket socketForReplicaOne=new DatagramSocket(Constants.listenReplicaOnePort);
+            socketForReplicaOne.setSoTimeout(10000);
             //socket to communicate with replica2
             DatagramSocket socketForReplicaTwo=new DatagramSocket(Constants.listenReplicaTwoPort);
+            //socket to communicate with replica3
+            DatagramSocket socketForReplicaThree=new DatagramSocket(Constants.listenReplicaThreePort);
+            //socket to communicate with replica4
+            DatagramSocket socketForReplicaFour=new DatagramSocket(Constants.listenReplicaFourPort);
 
             String response="";
             byte [] recieveByteOne=new byte[1024];
             byte [] recieveByteTwo=new byte[1024];
+            byte [] recieveByteThree=new byte[1024];
+            byte [] recieveByteFour=new byte[1024];
             DatagramPacket recievePacketOne=new DatagramPacket(recieveByteOne,recieveByteOne.length);
             DatagramPacket recievePacketTwo=new DatagramPacket(recieveByteTwo,recieveByteTwo.length);
-            socketForReplicaOne.receive(recievePacketOne);
+            DatagramPacket recievePacketThree=new DatagramPacket(recieveByteThree,recieveByteThree.length);
+            DatagramPacket recievePacketFour=new DatagramPacket(recieveByteFour,recieveByteFour.length);
+
+            try{
+                socketForReplicaOne.receive(recievePacketOne);
+            } catch (SocketTimeoutException e) {
+                //informCrash();
+            }
+
             socketForReplicaTwo.receive(recievePacketTwo);
 
             //Response from four replicas
@@ -54,28 +74,44 @@ public class FrontendService implements FrontendInterface{
             String resReplicaThree=resReplicaOne;
             String resReplicaFour=resReplicaTwo;
 
-            String checkSoftwareFailure=checkResponsesFromReplicas(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
-            String[] arr=checkSoftwareFailure.split(";");
-            response=arr[0];
-            String error=arr[1];
-            if(replicaOneFaultCount==3){
-                replicaOneFaultCount=0;
-                sendReplicaReplaceRequest(1);
+            checkResponseFromReplicas(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
+
+            response=majorityResponse(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
+
+            //check for a software failure
+            String errorReplicaInfo="";
+            byte [] errorReplicaInfoByteArray=new byte[1024];
+            if (faultReplicaOne){
+                errorReplicaInfo="ReplicaOne";
             }
-            else if(replicaTwoFaultCount==3){
-                replicaTwoFaultCount=0;
-                sendReplicaReplaceRequest(2);
+            else if (faultReplicaTwo){
+                errorReplicaInfo="ReplicaTwo";
             }
-            else if(replicaThreeFaultCount==3){
-                replicaThreeFaultCount=0;
-                sendReplicaReplaceRequest(3);
+            else if(faultReplicaThree){
+                errorReplicaInfo="ReplicaThree";
             }
-            else if(replicaFourFaultCount==3){
-                replicaFourFaultCount=0;
-                sendReplicaReplaceRequest(4);
+            else if (faultReplicaFour){
+                errorReplicaInfo="ReplicaFour";
+            }
+            else{
+                errorReplicaInfo="None";
             }
 
-            response=checkSoftwareFailure +" "+resReplicaOne+" "+resReplicaTwo;
+            errorReplicaInfoByteArray=errorReplicaInfo.getBytes();
+
+            //send possible error reply to replica One
+            InetAddress addressReplicaOne=recievePacketOne.getAddress();
+            int portReplicaOne=recievePacketOne.getPort();
+            DatagramPacket packetForOne=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaOne,portReplicaOne);
+            socketForReplicaOne.send(packetForOne);
+
+            //send possible error reply to replica Two
+            InetAddress addressReplicaTwo=recievePacketTwo.getAddress();
+            int portReplicaTwo=recievePacketTwo.getPort();
+            DatagramPacket packetForTwo=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaTwo,portReplicaTwo);
+            socketForReplicaTwo.send(packetForTwo);
+
+
             socketForReplicaOne.close();
             socketForReplicaTwo.close();
             socket.close();
@@ -86,53 +122,106 @@ public class FrontendService implements FrontendInterface{
             throw new RuntimeException(e);
         }
     }
-    public String checkResponsesFromReplicas(String resReplicaOne,String resReplicaTwo, String resReplicaThree,String resReplicaFour){
-        String result="";
-        String error="";
-        String[] arr=new String[4];
-        arr[0]=resReplicaOne;
-        arr[1]=resReplicaTwo;
-        arr[2]=resReplicaThree;
-        arr[3]=resReplicaFour;
-        int flag = 0;
-        for(int i=0;i<4;i++){
-            for(int j=i+1;j<4;j++){
-                if(!arr[i].equals(arr[j])){
-                    flag++;
-                }
-                if(flag==2){
-                    error= arr[i];
-                    break;
+    public void checkResponseFromReplicas(String resReplicaOne,String resReplicaTwo,String resReplicaThree,String resReplicaFour) {
+        String [] responses=new String[4];
+        responses[0]=resReplicaOne;
+        responses[1]=resReplicaTwo;
+        responses[2]=resReplicaThree;
+        responses[3]=resReplicaFour;
+
+        //count not matching response of each replica
+        for (int i=0;i<4;i++) {
+            for(int j=0;j<4;j++) {
+                if (i!=j) {
+                    if(!responses[i].equals(responses[j])) {
+                        bugCount(i);
+                    }
                 }
             }
-            if(flag==0){
-                result = arr[i];
-            }
         }
-        if(error.equals(resReplicaOne)){
-            replicaOneFaultCount++;
-            error="ReplicaOne";
-        }
-        else if(error.equals(resReplicaTwo)){
-            replicaTwoFaultCount++;
-            error="ReplicaTwo";
-        }
-        else if(error.equals(resReplicaThree)){
-            replicaThreeFaultCount++;
-            error="ReplicaThree";
-        }
-        else if(error.equals(resReplicaFour)){
-            replicaFourFaultCount++;
-            error="ReplicaFour";
-        }
-        String res = result+";"+error;
-        return res;
+
     }
+    public void bugCount(int rmNumber) {
+        switch(rmNumber) {
+            case 0:{
+                bugCountRmOne++;
+                if (bugCountRmOne==3) {
+                    faultReplicaOne=true;
+                }
+                break;
+            }
+            case 1:{
+                bugCountRmTwo++;
+                if (bugCountRmTwo==3) {
+                    faultReplicaTwo=true;
+                }
+                break;
+            }
+            case 2:{
+                bugCountRmThree++;
+                if (bugCountRmThree==3) {
+                    faultReplicaThree=true;
+                }
+                break;
+            }
+
+            case 3:{
+                bugCountRmFour++;
+                if (bugCountRmFour==3) {
+                    faultReplicaFour=true;
+                }
+                break;
+            }
+        }
+    }
+
+    public String majorityResponse(String resReplicaOne, String resReplicaTwo, String resReplicaThree,String resReplicaFour){
+        //least bug count will be returned as a response to the client.
+        String resultResponse="";
+        int [] bugCount=new int[4];
+        bugCount[0]=bugCountRmOne;
+        bugCount[1]=bugCountRmTwo;
+        bugCount[2]=bugCountRmThree;
+        bugCount[3]=bugCountRmFour;
+
+        int minBug=Integer.MAX_VALUE;
+        int result=0;
+        for (int i=0;i<4;i++) {
+            if (bugCount[i]<minBug) {
+                minBug=bugCount[i];
+                result=i;
+            }
+        }
+        bugCountRmOne=0;
+        bugCountRmTwo=0;
+        bugCountRmThree=0;
+        bugCountRmFour=0;
+        switch(result) {
+            case 0: {
+                resultResponse = resReplicaOne;
+                break;
+            }
+            case 1: {
+                resultResponse = resReplicaTwo;
+                break;
+            }
+            case 2: {
+                resultResponse = resReplicaThree;
+                break;
+            }
+            case 3: {
+                resultResponse = resReplicaFour;
+                break;
+            }
+        }
+        return resultResponse;
+    }
+
     public String getRequestFromClient(RequestObject requestObject){
-        return null;
+        return forwardMessageToSequencer("Hello");
     }
     public String sendReplicaReplaceRequest(int replicaNumber){
-        return null;
+        return "This will replace a server replica";
 //        return forwardMessageToSequencer("Hello");
     }
 }

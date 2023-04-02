@@ -6,5 +6,7 @@ public class Constants {
     public static final int multicastPort=4400;
     public static final int listenReplicaOnePort=5122;
     public static final int listenReplicaTwoPort=5123;
+    public static final int listenReplicaThreePort=5124;
+    public static final int listenReplicaFourPort=5125;
 
 }

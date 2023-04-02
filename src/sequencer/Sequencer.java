@@ -4,6 +4,7 @@ import constants.Constants;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.HashMap;
 
 public class Sequencer {
     public static void main(String[] args) throws IOException {
@@ -15,17 +16,13 @@ public class Sequencer {
 
     }
     public static void requestHandler(DatagramSocket socket) throws IOException {
+        //revieve a request from the frontend
         byte[] byteMessage=new byte[1024];
         DatagramPacket dataPacket=new DatagramPacket(byteMessage,byteMessage.length);
         socket.receive(dataPacket);
         String request=new String(dataPacket.getData()).trim();
         String reply="Message recieved by sequencer "+request;
         multicast(request);
-//        int port= dataPacket.getPort();
-//        InetAddress ia=dataPacket.getAddress();
-//        byte[] responseByte=reply.getBytes();
-//        DatagramPacket sendPacket=new DatagramPacket(responseByte,responseByte.length,ia,port);
-//        socket.send(sendPacket);
     }
     public static void multicast(String request) throws IOException {
         DatagramSocket multicastSocket=new DatagramSocket();
