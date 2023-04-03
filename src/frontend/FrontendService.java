@@ -110,19 +110,23 @@ public class FrontendService implements FrontendInterface{
             String softwareFailureReplicaInfo="";
 
             if (faultReplicaOne){
-                softwareFailureReplicaInfo="ReplicaOne";
+                softwareFailureReplicaInfo="SoftwareFailure";
+                sendSoftwareFailureMsgToRM(socketForReplicaOne, recievePacketOne, softwareFailureReplicaInfo.getBytes());
                 faultReplicaOne=false;
             }
             else if (faultReplicaTwo){
-                softwareFailureReplicaInfo="ReplicaTwo";
+                softwareFailureReplicaInfo="SoftwareFailure";
+                sendSoftwareFailureMsgToRM(socketForReplicaTwo, recievePacketTwo, softwareFailureReplicaInfo.getBytes());
                 faultReplicaTwo=false;
             }
             else if(faultReplicaThree){
-                softwareFailureReplicaInfo="ReplicaThree";
+                softwareFailureReplicaInfo="SoftwareFailure";
+                sendSoftwareFailureMsgToRM(socketForReplicaThree, recievePacketThree, softwareFailureReplicaInfo.getBytes());
                 faultReplicaThree=false;
             }
             else if (faultReplicaFour){
-                softwareFailureReplicaInfo="ReplicaFour";
+                softwareFailureReplicaInfo="SoftwareFailure";
+                sendSoftwareFailureMsgToRM(socketForReplicaFour, recievePacketFour, softwareFailureReplicaInfo.getBytes());
                 faultReplicaFour=false;
             }
             else{
@@ -133,19 +137,23 @@ public class FrontendService implements FrontendInterface{
             String crashFailureReplicaInfo="";
             crashReplicaThree=true;
             if (crashReplicaOne){
-                crashFailureReplicaInfo="ReplicaOne";
+                crashFailureReplicaInfo="CrashFailure";
+                sendCrashFailureMsgToRM(socketForReplicaOne, recievePacketOne, crashFailureReplicaInfo.getBytes());
                 crashReplicaOne=false;
             }
             else if (crashReplicaTwo){
-                crashFailureReplicaInfo="ReplicaTwo";
+                crashFailureReplicaInfo="CrashFailure";
+                sendCrashFailureMsgToRM(socketForReplicaTwo, recievePacketTwo, crashFailureReplicaInfo.getBytes());
                 crashReplicaTwo=false;
             }
             else if(crashReplicaThree){
-                crashFailureReplicaInfo="ReplicaThree";
+                crashFailureReplicaInfo="CrashFailure";
+                sendCrashFailureMsgToRM(socketForReplicaThree, recievePacketThree, crashFailureReplicaInfo.getBytes());
                 crashReplicaThree=false;
             }
             else if (crashReplicaFour){
-                crashFailureReplicaInfo="ReplicaFour";
+                crashFailureReplicaInfo="CrashFailure";
+                sendCrashFailureMsgToRM(socketForReplicaFour, recievePacketFour, crashFailureReplicaInfo.getBytes());
                 crashReplicaFour=false;
             }
             else{
@@ -288,6 +296,20 @@ public class FrontendService implements FrontendInterface{
 
     public String getRequestFromClient(RequestObject requestObject) {
         return forwardMessageToSequencer("Hello");
+    }
+    public String sendSoftwareFailureMsgToRM(DatagramSocket socket, DatagramPacket packet, byte[] softwareFailureByteArray) throws IOException {
+        InetAddress addressReplicaOne=packet.getAddress();
+        int portReplicaOne=packet.getPort();
+        DatagramPacket packetForOne=new DatagramPacket(softwareFailureByteArray,softwareFailureByteArray.length,addressReplicaOne,portReplicaOne);
+        socket.send(packetForOne);
+        return "This will send a software failure message to a replica";
+    }
+    public String sendCrashFailureMsgToRM(DatagramSocket socket, DatagramPacket packet, byte[] crashFailureByteArray) throws IOException {
+        InetAddress addressReplicaOne=packet.getAddress();
+        int portReplicaOne=packet.getPort();
+        DatagramPacket packetForOne=new DatagramPacket(crashFailureByteArray,crashFailureByteArray.length,addressReplicaOne,portReplicaOne);
+        socket.send(packetForOne);
+        return "This will send a crash failure message to a replica";
     }
     public String sendReplicaReplaceRequest(int replicaNumber){
         return "This will replace a server replica";
