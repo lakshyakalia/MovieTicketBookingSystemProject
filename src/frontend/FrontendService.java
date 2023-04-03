@@ -22,6 +22,12 @@ public class FrontendService implements FrontendInterface{
     static boolean faultReplicaThree=false;
     static boolean faultReplicaFour=false;
 
+    static boolean crashReplicaOne=false;
+    static boolean crashReplicaTwo=false;
+    static boolean crashReplicaThree=false;
+    static boolean crashReplicaFour=false;
+
+
 
 
     @Override
@@ -64,28 +70,28 @@ public class FrontendService implements FrontendInterface{
             try{
                 socketForReplicaOne.receive(recievePacketOne);
             } catch (SocketTimeoutException e) {
-                //informCrash();
+                crashReplicaOne=true;
             }
 
             //recieve response from replica 2
             try{
                 socketForReplicaTwo.receive(recievePacketTwo);
             } catch (SocketTimeoutException e) {
-                //informCrash();
+                crashReplicaTwo=true;
             }
 
             //recieve response from replica 3
             try{
                 socketForReplicaThree.receive(recievePacketThree);
             } catch (SocketTimeoutException e) {
-                //informCrash();
+                crashReplicaTwo=true;
             }
 
             //recieve response from replica 4
             try{
                 socketForReplicaFour.receive(recievePacketFour);
             } catch (SocketTimeoutException e) {
-                //informCrash();
+                crashReplicaFour=true;
             }
 
 
@@ -98,26 +104,55 @@ public class FrontendService implements FrontendInterface{
             checkResponseFromReplicas(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
             response=majorityResponse(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
 
-            //check for a software failure
-            String errorReplicaInfo="";
             byte [] errorReplicaInfoByteArray=new byte[1024];
+
+            //check for a software failure
+            String softwareFailureReplicaInfo="";
+
             if (faultReplicaOne){
-                errorReplicaInfo="ReplicaOne";
+                softwareFailureReplicaInfo="ReplicaOne";
+                faultReplicaOne=false;
             }
             else if (faultReplicaTwo){
-                errorReplicaInfo="ReplicaTwo";
+                softwareFailureReplicaInfo="ReplicaTwo";
+                faultReplicaTwo=false;
             }
             else if(faultReplicaThree){
-                errorReplicaInfo="ReplicaThree";
+                softwareFailureReplicaInfo="ReplicaThree";
+                faultReplicaThree=false;
             }
             else if (faultReplicaFour){
-                errorReplicaInfo="ReplicaFour";
+                softwareFailureReplicaInfo="ReplicaFour";
+                faultReplicaFour=false;
             }
             else{
-                errorReplicaInfo="None";
+                softwareFailureReplicaInfo="None";
             }
 
-            errorReplicaInfoByteArray=errorReplicaInfo.getBytes();
+            //check for a crash failure
+            String crashFailureReplicaInfo="";
+            crashReplicaThree=true;
+            if (crashReplicaOne){
+                crashFailureReplicaInfo="ReplicaOne";
+                crashReplicaOne=false;
+            }
+            else if (crashReplicaTwo){
+                crashFailureReplicaInfo="ReplicaTwo";
+                crashReplicaTwo=false;
+            }
+            else if(crashReplicaThree){
+                crashFailureReplicaInfo="ReplicaThree";
+                crashReplicaThree=false;
+            }
+            else if (crashReplicaFour){
+                crashFailureReplicaInfo="ReplicaFour";
+                crashReplicaFour=false;
+            }
+            else{
+                crashFailureReplicaInfo="None";
+            }
+            String failureReplica=crashFailureReplicaInfo+";"+softwareFailureReplicaInfo;
+            errorReplicaInfoByteArray=failureReplica.getBytes();
 
             //send possible error reply to replica One
             InetAddress addressReplicaOne=recievePacketOne.getAddress();
