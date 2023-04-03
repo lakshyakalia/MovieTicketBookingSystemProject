@@ -51,10 +51,13 @@ public class FrontendService implements FrontendInterface{
             socketForReplicaOne.setSoTimeout(10000);
             //socket to communicate with replica2
             DatagramSocket socketForReplicaTwo=new DatagramSocket(Constants.listenReplicaTwoPort);
+            socketForReplicaOne.setSoTimeout(10000);
             //socket to communicate with replica3
             DatagramSocket socketForReplicaThree=new DatagramSocket(Constants.listenReplicaThreePort);
+            socketForReplicaOne.setSoTimeout(10000);
             //socket to communicate with replica4
             DatagramSocket socketForReplicaFour=new DatagramSocket(Constants.listenReplicaFourPort);
+            socketForReplicaOne.setSoTimeout(10000);
 
             String response="";
             byte [] recieveByteOne=new byte[1024];
