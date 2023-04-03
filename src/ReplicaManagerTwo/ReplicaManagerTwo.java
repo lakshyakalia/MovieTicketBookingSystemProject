@@ -33,8 +33,10 @@ public class ReplicaManagerTwo {
                 }
                 System.out.println(recieved);
 
+                //do required operations in the replicas
+
                 //Send Response to the frontend
-                String toFrontEnd=recieved+" Message From the Replica Manager 2. ";
+                String toFrontEnd="Ticket Booked Successfully";
                 DatagramSocket toFrontEndSocket=new DatagramSocket();
                 byte[] byteMessage=toFrontEnd.getBytes();
                 InetAddress ia=InetAddress.getLocalHost();
@@ -42,6 +44,11 @@ public class ReplicaManagerTwo {
                 toFrontEndSocket.send(packetToFrontend);
 
                 //Recieve the update from the Frontend
+                byte[] byteFromFrontend=new byte[1024];
+                DatagramPacket packetFromFrontend=new DatagramPacket(byteFromFrontend,byteFromFrontend.length);
+                toFrontEndSocket.receive(packetFromFrontend);
+                String checkString=new String(packetFromFrontend.getData()).trim();
+                System.out.println("Final "+checkString);
             }
             multicastSocket.leaveGroup(group);
             multicastSocket.close();

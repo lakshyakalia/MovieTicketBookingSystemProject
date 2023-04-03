@@ -1,4 +1,4 @@
-package ReplicaManagerOne;
+package ReplicaManagerThree;
 
 import constants.Constants;
 
@@ -9,12 +9,12 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.util.HashMap;
 
-public class ReplicaManagerOne {
+public class ReplicaManagerThree {
     HashMap<Integer,String> requestSequenceMap=new HashMap<>();
     static int expectedSequence=0;
     public static void main(String[] args) throws IOException {
         while(true){
-            System.out.println("Replica Manager One Started");
+            System.out.println("Replica Manager Three Started");
             recieveMulticstMessage();
         }
     }
@@ -30,7 +30,7 @@ public class ReplicaManagerOne {
                 DatagramPacket packet=new DatagramPacket(recieveMessage,recieveMessage.length);
                 multicastSocket.receive(packet);
                 recieved=new String(packet.getData(),0,packet.getLength()).trim().toString();
-                System.out.println("Repica One recieved... "+recieved);
+                System.out.println("Repica Three recieved... "+recieved);
                 if("end".equals(recieved)) {
                     break;
                 }
@@ -43,10 +43,10 @@ public class ReplicaManagerOne {
                 DatagramSocket toFrontEndSocket=new DatagramSocket();
                 byte[] byteMessage=toFrontEnd.getBytes();
                 InetAddress ia=InetAddress.getLocalHost();
-                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaOnePort);
+                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaThreePort);
                 toFrontEndSocket.send(packetToFrontend);
 
-                //Recieve the update from the frontend about the response
+                //Recieve the update from the Frontend
                 byte[] byteFromFrontend=new byte[1024];
                 DatagramPacket packetFromFrontend=new DatagramPacket(byteFromFrontend,byteFromFrontend.length);
                 toFrontEndSocket.receive(packetFromFrontend);

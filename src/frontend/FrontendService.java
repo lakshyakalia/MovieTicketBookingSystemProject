@@ -60,22 +60,42 @@ public class FrontendService implements FrontendInterface{
             DatagramPacket recievePacketThree=new DatagramPacket(recieveByteThree,recieveByteThree.length);
             DatagramPacket recievePacketFour=new DatagramPacket(recieveByteFour,recieveByteFour.length);
 
+            //recieve response from replica 1
             try{
                 socketForReplicaOne.receive(recievePacketOne);
             } catch (SocketTimeoutException e) {
                 //informCrash();
             }
 
-            socketForReplicaTwo.receive(recievePacketTwo);
+            //recieve response from replica 2
+            try{
+                socketForReplicaTwo.receive(recievePacketTwo);
+            } catch (SocketTimeoutException e) {
+                //informCrash();
+            }
+
+            //recieve response from replica 3
+            try{
+                socketForReplicaThree.receive(recievePacketThree);
+            } catch (SocketTimeoutException e) {
+                //informCrash();
+            }
+
+            //recieve response from replica 4
+            try{
+                socketForReplicaFour.receive(recievePacketFour);
+            } catch (SocketTimeoutException e) {
+                //informCrash();
+            }
+
 
             //Response from four replicas
             String resReplicaOne=new String(recievePacketOne.getData()).trim();
             String resReplicaTwo=new String(recievePacketTwo.getData()).trim();
-            String resReplicaThree=resReplicaOne;
-            String resReplicaFour=resReplicaTwo;
+            String resReplicaThree=new String(recievePacketThree.getData()).trim();
+            String resReplicaFour=new String(recievePacketFour.getData()).trim();
 
             checkResponseFromReplicas(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
-
             response=majorityResponse(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
 
             //check for a software failure
@@ -111,9 +131,23 @@ public class FrontendService implements FrontendInterface{
             DatagramPacket packetForTwo=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaTwo,portReplicaTwo);
             socketForReplicaTwo.send(packetForTwo);
 
+            //send possible error reply to replica Three
+            InetAddress addressReplicaThree=recievePacketThree.getAddress();
+            int portReplicaThree=recievePacketThree.getPort();
+            DatagramPacket packetForThree=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaThree,portReplicaThree);
+            socketForReplicaThree.send(packetForThree);
+
+            //send possible error reply to replica Four
+            InetAddress addressReplicaFour=recievePacketFour.getAddress();
+            int portReplicaFour=recievePacketFour.getPort();
+            DatagramPacket packetForFour=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaFour,portReplicaFour);
+            socketForReplicaFour.send(packetForFour);
+
 
             socketForReplicaOne.close();
             socketForReplicaTwo.close();
+            socketForReplicaThree.close();
+            socketForReplicaFour.close();
             socket.close();
             return response;
         } catch (SocketException | UnknownHostException e) {
@@ -217,7 +251,7 @@ public class FrontendService implements FrontendInterface{
         return resultResponse;
     }
 
-    public String getRequestFromClient(RequestObject requestObject){
+    public String getRequestFromClient(RequestObject requestObject) {
         return forwardMessageToSequencer("Hello");
     }
     public String sendReplicaReplaceRequest(int replicaNumber){
