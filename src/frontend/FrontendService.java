@@ -151,8 +151,8 @@ public class FrontendService implements FrontendInterface{
             else{
                 crashFailureReplicaInfo="None";
             }
-            String failureReplica=crashFailureReplicaInfo+";"+softwareFailureReplicaInfo;
-            errorReplicaInfoByteArray=failureReplica.getBytes();
+            String failureReplicaInfo=crashFailureReplicaInfo+";"+softwareFailureReplicaInfo;
+            errorReplicaInfoByteArray=failureReplicaInfo.getBytes();
 
             //send possible error reply to replica One
             InetAddress addressReplicaOne=recievePacketOne.getAddress();
