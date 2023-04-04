@@ -1,12 +1,12 @@
 package replica.ReplicaOne;
 
 import constants.Constants;
+import replica.ReplicaOne.replica.Interface.MovieInterface;
 
+import javax.xml.namespace.QName;
+import javax.xml.ws.Service;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -15,10 +15,15 @@ public class ReplicaManagerOne {
     static int expectedSequence=0;
     private static int softwareFailureCount=0;
     private static int requestCount=1;
+    public static Service atwService;
+    public static Service verService;
+    public static Service outService;
+    public static MovieInterface movieRef;
     private static ArrayList<String> requestList=new ArrayList<>();
     public static void main(String[] args) throws IOException {
         while(true){
             System.out.println("Replica Manager One Started");
+            initializeServices();
             recieveMulticstMessage();
         }
     }
@@ -55,11 +60,13 @@ public class ReplicaManagerOne {
                 }
                 if(flag){
                     requestCount++;
+                    sendRequestToReplica(requestList.get(index));
                     //TODO: do required operations in the replicas
                     requestList.remove(index);
                 }
                 else if (Integer.parseInt(recieved.split(";")[recieved.split(";").length-1])== requestCount ) {
                     requestCount++;
+                    sendRequestToReplica(recieved);
                     //TODO: do required operations in the replicas
                 }
                 else{
@@ -103,5 +110,57 @@ public class ReplicaManagerOne {
                 System.out.println("Crash Failure");
 //            TODO: Replace instance of replica
         }
+    }
+
+    public static void initializeServices() throws MalformedURLException {
+        URL atwaterURL = new URL("http://localhost:8070/atwater?wsdl");
+        QName atwaterQName = new QName("http://Services/", "MovieTicketServiceService");
+        atwService = Service.create(atwaterURL, atwaterQName);
+
+        URL outremontURL = new URL("http://localhost:8080/outremont?wsdl");
+        QName outremontQName = new QName("http://Services/", "MovieTicketServiceService");
+        outService = Service.create(outremontURL, outremontQName);
+
+        URL verdunURL = new URL("http://localhost:8090/verdun?wsdl");
+        QName verdunQName = new QName("http://Services/", "MovieTicketServiceService");
+        verService = Service.create(verdunURL,verdunQName);
+    }
+    public static String sendRequestToReplica(String request){
+        String res = "";
+        switch (request.split(";")[request.split(";").length - 2]){
+            case "addMovieSlots":{
+                res = movieRef.addMovieSlots(addMovieID, addMovieName, addBookingCapacity);
+                break;
+            }
+            case "removeMovieSlots":{
+                res = movieRef.removeMovieSlots(removeMovieID, removeMovieName);
+                break;
+            }
+            case "listMovieAvailability":{
+                res = movieRef.listMovieShowAvailability(listMovieName);
+                break;
+            }
+            case "bookMovieTicket":{
+                res = movieRef.bookMovieTickets(userID, bookMovieID, bookMovieName, bookNumberOfTickets);
+                break;
+            }
+            case "getBookingSchedule":{
+                res = movieRef.getBookingSchedule(userID);
+                break;
+            }
+            case "cancelMovieTicket":{
+                res = movieRef.cancelMovieTickets(userID, cancelBookMovieID, cancelBookMovieName, cancelBookNumberOfTickets);
+                break;
+            }
+            case "exchangeMovieTickets":{
+                res = movieRef.exchangeTickets(userID, bookMovieID, newBookMovieID, newBookMovieName, newBookNumberOfTickets);
+                break;
+            }
+            default:{
+                System.out.println("Invalid Request");
+                break;
+            }
+        }
+        return res;
     }
 }

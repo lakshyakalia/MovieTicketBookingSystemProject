@@ -112,6 +112,7 @@ public class Client  {
 //                        log="Remove Movie Slots";
                         requestObject.movieID = removeMovieID;
                         requestObject.movieName = removeMovieName;
+                        requestObject.requestType = "removeMovieSlots";
                         frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.removeMovieSlots(removeMovieID, removeMovieName);
 //                        writeToLogFile("removeMovieSlots",userID+" "+removeMovieID+" "+removeMovieName,res);
@@ -123,6 +124,7 @@ public class Client  {
                         String listMovieName = sc2.nextLine();
 //                        log="List Movie Show Availability";
                         requestObject.movieName = listMovieName;
+                        requestObject.requestType = "listMovieShowsAvailability";
                         frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.listMovieShowAvailability(listMovieName);
 //                        writeToLogFile("listMovieShowsAvailability",userID+" "+listMovieName,res);
@@ -140,6 +142,7 @@ public class Client  {
                         requestObject.movieID = bookMovieID;
                         requestObject.movieName = bookMovieName;
                         requestObject.noOfTickets = bookNumberOfTickets;
+                        requestObject.requestType = "bookMovieTickets";
                         frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.bookMovieTickets(userID, bookMovieID, bookMovieName, bookNumberOfTickets);
 //                        writeToLogFile("bookMovieTickets",userID+" "+bookMovieID+" "+bookMovieName+" "+bookNumberOfTickets,res);
@@ -148,6 +151,7 @@ public class Client  {
                     }
                     case 5:{
 //                        log="Get Booking Done by user";
+                        requestObject.requestType = "getBookingSchedule";
                         frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.getBookingSchedule(userID);
 //                        writeToLogFile("getBookingSchedule",userID,res);
@@ -165,6 +169,7 @@ public class Client  {
                         requestObject.movieID = cancelBookMovieID;
                         requestObject.movieName = cancelBookMovieName;
                         requestObject.noOfTickets = cancelBookNumberOfTickets;
+                        requestObject.requestType = "cancelMovieTickets";
                         frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.cancelMovieTickets(userID, cancelBookMovieID, cancelBookMovieName, cancelBookNumberOfTickets);
 //                        writeToLogFile("cancelMovieTickets",userID+" "+cancelBookMovieID+" "+cancelBookMovieName+" "+cancelBookNumberOfTickets,res);
@@ -198,6 +203,7 @@ public class Client  {
                         requestObject.movieID = bookMovieID;
                         requestObject.movieName = bookMovieName;
                         requestObject.noOfTickets = bookNumberOfTickets;
+                        requestObject.requestType = "bookMovieTickets";
                         frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.bookMovieTickets(userID, bookMovieID, bookMovieName, bookNumberOfTickets);
 //                        writeToLogFile("bookMovieTickets",userID+" "+bookMovieID+" "+bookMovieName+" "+bookNumberOfTickets,res);
@@ -207,6 +213,7 @@ public class Client  {
                     case 2:
                     {
 //                        log="Get Booking Done by user";
+                        requestObject.requestType = "getBookingSchedule";
                         frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.getBookingSchedule(userID);
 //                        writeToLogFile("getBookingSchedule",userID,res);
@@ -225,6 +232,7 @@ public class Client  {
                         requestObject.movieID = cancelBookMovieID;
                         requestObject.movieName = cancelBookMovieName;
                         requestObject.noOfTickets = cancelBookNumberOfTickets;
+                        requestObject.requestType = "cancelMovieTickets";
                         frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.cancelMovieTickets(userID, cancelBookMovieID, cancelBookMovieName, cancelBookNumberOfTickets);
 //                        writeToLogFile("cancelMovieTickets",userID+" "+cancelBookMovieID+" "+cancelBookMovieName+" "+cancelBookNumberOfTickets,res);
@@ -245,6 +253,7 @@ public class Client  {
                         requestObject.movieID = bookMovieID;
                         requestObject.movieName = newBookMovieName;
                         requestObject.noOfTickets = newBookNumberOfTickets;
+                        requestObject.requestType = "exchangeMovieTickets";
                         frontendInterface.getRequestFromClient(requestObject);
 //                        String res = movieRef.exchangeTickets(userID, bookMovieID, newBookMovieID, newBookMovieName, newBookNumberOfTickets);
 //                        writeToLogFile("exchangeMovieTickets",userID+" "+bookMovieID+" "+newBookMovieID+" "+newBookMovieName+" "+newBookNumberOfTickets,res);
