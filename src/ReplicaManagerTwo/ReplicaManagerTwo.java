@@ -9,6 +9,8 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 
 public class ReplicaManagerTwo {
+
+    private static int softwareFailureCount=0;
     public static void main(String[] args) throws IOException {
         System.out.println("Replica Manager Two Started");
         while(true){
@@ -48,12 +50,27 @@ public class ReplicaManagerTwo {
                 DatagramPacket packetFromFrontend=new DatagramPacket(byteFromFrontend,byteFromFrontend.length);
                 toFrontEndSocket.receive(packetFromFrontend);
                 String checkString=new String(packetFromFrontend.getData()).trim();
-                System.out.println("Final "+checkString);
+                checkErrorResponseFromFrontend(checkString);
+//              System.out.println("Final "+checkString);
             }
             multicastSocket.leaveGroup(group);
             multicastSocket.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public static void checkErrorResponseFromFrontend(String checkString){
+        if(checkString.equals("SoftwareFailure")){
+            softwareFailureCount++;
+            if(softwareFailureCount==3){
+                System.out.println("Software Failure");
+//                TODO: Replace instance of replica
+            }
+//            System.out.println("Error in the response from the frontend");
+        }
+        else if(checkString.equals("CrashFailure")){
+            System.out.println("Crash Failure");
+//            TODO: Replace instance of replica
         }
     }
 }

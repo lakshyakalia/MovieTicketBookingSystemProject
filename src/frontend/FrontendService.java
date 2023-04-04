@@ -108,10 +108,8 @@ public class FrontendService implements FrontendInterface{
             response=majorityResponse(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
 
             byte [] errorReplicaInfoByteArray=new byte[1024];
-
             //check for a software failure
             String softwareFailureReplicaInfo="";
-
             if (faultReplicaOne){
                 softwareFailureReplicaInfo="SoftwareFailure";
                 sendSoftwareFailureMsgToRM(socketForReplicaOne, recievePacketOne, softwareFailureReplicaInfo.getBytes());
@@ -162,32 +160,32 @@ public class FrontendService implements FrontendInterface{
             else{
                 crashFailureReplicaInfo="None";
             }
-            String failureReplicaInfo=crashFailureReplicaInfo+";"+softwareFailureReplicaInfo;
-            errorReplicaInfoByteArray=failureReplicaInfo.getBytes();
 
-            //send possible error reply to replica One
-            InetAddress addressReplicaOne=recievePacketOne.getAddress();
-            int portReplicaOne=recievePacketOne.getPort();
-            DatagramPacket packetForOne=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaOne,portReplicaOne);
-            socketForReplicaOne.send(packetForOne);
-
-            //send possible error reply to replica Two
-            InetAddress addressReplicaTwo=recievePacketTwo.getAddress();
-            int portReplicaTwo=recievePacketTwo.getPort();
-            DatagramPacket packetForTwo=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaTwo,portReplicaTwo);
-            socketForReplicaTwo.send(packetForTwo);
-
-            //send possible error reply to replica Three
-            InetAddress addressReplicaThree=recievePacketThree.getAddress();
-            int portReplicaThree=recievePacketThree.getPort();
-            DatagramPacket packetForThree=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaThree,portReplicaThree);
-            socketForReplicaThree.send(packetForThree);
-
-            //send possible error reply to replica Four
-            InetAddress addressReplicaFour=recievePacketFour.getAddress();
-            int portReplicaFour=recievePacketFour.getPort();
-            DatagramPacket packetForFour=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaFour,portReplicaFour);
-            socketForReplicaFour.send(packetForFour);
+////            errorReplicaInfoByteArray=failureReplicaInfo.getBytes();
+//
+//            //send possible error reply to replica One
+//            InetAddress addressReplicaOne=recievePacketOne.getAddress();
+//            int portReplicaOne=recievePacketOne.getPort();
+//            DatagramPacket packetForOne=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaOne,portReplicaOne);
+//            socketForReplicaOne.send(packetForOne);
+//
+//            //send possible error reply to replica Two
+//            InetAddress addressReplicaTwo=recievePacketTwo.getAddress();
+//            int portReplicaTwo=recievePacketTwo.getPort();
+//            DatagramPacket packetForTwo=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaTwo,portReplicaTwo);
+//            socketForReplicaTwo.send(packetForTwo);
+//
+//            //send possible error reply to replica Three
+//            InetAddress addressReplicaThree=recievePacketThree.getAddress();
+//            int portReplicaThree=recievePacketThree.getPort();
+//            DatagramPacket packetForThree=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaThree,portReplicaThree);
+//            socketForReplicaThree.send(packetForThree);
+//
+//            //send possible error reply to replica Four
+//            InetAddress addressReplicaFour=recievePacketFour.getAddress();
+//            int portReplicaFour=recievePacketFour.getPort();
+//            DatagramPacket packetForFour=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaFour,portReplicaFour);
+//            socketForReplicaFour.send(packetForFour);
 
 
             socketForReplicaOne.close();

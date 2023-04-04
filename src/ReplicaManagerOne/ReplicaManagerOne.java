@@ -53,7 +53,7 @@ public class ReplicaManagerOne {
                 toFrontEndSocket.receive(packetFromFrontend);
                 String checkString=new String(packetFromFrontend.getData()).trim();
                 checkErrorResponseFromFrontend(checkString);
-//                System.out.println("Final "+checkString);
+//              System.out.println("Final "+checkString);
             }
             multicastSocket.leaveGroup(group);
             multicastSocket.close();
@@ -65,12 +65,13 @@ public class ReplicaManagerOne {
         if(checkString.equals("SoftwareFailure")){
             softwareFailureCount++;
             if(softwareFailureCount==3){
-//                System.out.println("Software Failure");
+                System.out.println("Software Failure");
 //                TODO: Replace instance of replica
             }
 //            System.out.println("Error in the response from the frontend");
         }
         else if(checkString.equals("CrashFailure")){
+                System.out.println("Crash Failure");
 //            TODO: Replace instance of replica
         }
     }
