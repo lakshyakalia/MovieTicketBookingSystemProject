@@ -26,6 +26,7 @@ public class FrontendService implements FrontendInterface{
     static boolean crashReplicaTwo=false;
     static boolean crashReplicaThree=false;
     static boolean crashReplicaFour=false;
+    private static int requestCount=0;
 
 
 
@@ -39,7 +40,8 @@ public class FrontendService implements FrontendInterface{
         try{
             //send a message via UDP to a sequencer
             DatagramSocket socket=new DatagramSocket(Constants.frontendPort);
-            String messageToSend=message;
+            requestCount++;
+            String messageToSend=message + ";" + requestCount;
             byte[] byteMessage=messageToSend.getBytes();
             InetAddress ia=InetAddress.getLocalHost();
             DatagramPacket packet=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.sequencerPort);

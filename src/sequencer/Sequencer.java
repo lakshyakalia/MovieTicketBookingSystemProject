@@ -4,9 +4,12 @@ import constants.Constants;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Sequencer {
+    private static int requestCount=1;
+    private static ArrayList<String> requestList=new ArrayList<>();
     public static void main(String[] args) throws IOException {
         DatagramSocket socket=new DatagramSocket(Constants.sequencerPort);
         System.out.println("Sequencer Started");
@@ -21,8 +24,33 @@ public class Sequencer {
         DatagramPacket dataPacket=new DatagramPacket(byteMessage,byteMessage.length);
         socket.receive(dataPacket);
         String request=new String(dataPacket.getData()).trim();
-        String reply="Message recieved by sequencer "+request;
-        multicast(request);
+        boolean flag=false;
+        int index = 0;
+        if(requestList.size()>0){
+            for (String s:requestList) {
+                if(Integer.parseInt(s.split(";")[s.split(";").length-1])== requestCount){
+                    flag = true;
+                    index = requestList.indexOf(s);
+                    break;
+                }
+            }
+
+        }
+        if(flag){
+            requestCount++;
+            String reply="Message recieved by sequencer "+requestList.get(index);
+            multicast(requestList.get(index));
+            requestList.remove(index);
+        }
+        else if (Integer.parseInt(request.split(";")[request.split(";").length-1])== requestCount ) {
+            requestCount++;
+            String reply="Message recieved by sequencer "+request;
+            multicast(request);
+        }
+        else{
+            requestList.add(request);
+        }
+
     }
     public static void multicast(String request) throws IOException {
         DatagramSocket multicastSocket=new DatagramSocket();
