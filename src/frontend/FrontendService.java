@@ -2,11 +2,12 @@ package frontend;
 
 import constants.Constants;
 import models.RequestObject;
+import models.ResponseObject;
 
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.jws.soap.SOAPBinding.Style;
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 
 @WebService(endpointInterface="frontend.FrontendInterface")
@@ -32,22 +33,29 @@ public class FrontendService implements FrontendInterface{
 
 
     @Override
-    public String forwardMessageToSequencer(String message) {
-        return sendMessageToSequencer(message);
+    public String forwardMessageToSequencer(RequestObject requestObject) {
+        return sendMessageToSequencer(requestObject);
     }
 
-    public String sendMessageToSequencer(String message){
+    public String sendMessageToSequencer(RequestObject requestObject){
         try{
             //send a message via UDP to a sequencer
             DatagramSocket socket=new DatagramSocket(Constants.frontendPort);
             requestCount++;
-            String messageToSend=message + ";" + requestCount;
-            byte[] byteMessage=messageToSend.getBytes();
+//            String messageToSend=message + ";" + requestCount;
+            requestObject.requestCount = requestCount;
+
+            // Serialize the object into a byte array
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(baos);
+            oos.writeObject(requestObject);
+            byte[] byteMessage = baos.toByteArray();
+
             InetAddress ia=InetAddress.getLocalHost();
             DatagramPacket packet=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.sequencerPort);
             socket.send(packet);
 
-            //recieve a message via UDP from the replicas
+            //receive a message via UDP from the replicas
             //socket to communicate with replica1
             DatagramSocket socketForReplicaOne=new DatagramSocket(Constants.listenReplicaOnePort);
             socketForReplicaOne.setSoTimeout(10000);
@@ -101,15 +109,42 @@ public class FrontendService implements FrontendInterface{
 
 
             //Response from four replicas
-            String resReplicaOne=new String(recievePacketOne.getData()).trim();
-            String resReplicaTwo=new String(recievePacketTwo.getData()).trim();
-            String resReplicaThree=new String(recievePacketThree.getData()).trim();
-            String resReplicaFour=new String(recievePacketFour.getData()).trim();
+            // Deserialize the byte array back into the original object
+            byte[] dataOne = recievePacketOne.getData();
+            ByteArrayInputStream baisOne = new ByteArrayInputStream(dataOne);
+            ObjectInputStream oisOne = new ObjectInputStream(baisOne);
+            ResponseObject resReplicaOne = (ResponseObject) oisOne.readObject();
 
-            checkResponseFromReplicas(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
-            response=majorityResponse(resReplicaOne,resReplicaTwo,resReplicaThree,resReplicaFour);
+//            String resReplicaOne=new String(recievePacketOne.getData()).trim();
 
-            byte [] errorReplicaInfoByteArray=new byte[1024];
+            // Deserialize the byte array back into the original object
+            byte[] dataTwo = recievePacketTwo.getData();
+            ByteArrayInputStream baisTwo = new ByteArrayInputStream(dataTwo);
+            ObjectInputStream oisTwo = new ObjectInputStream(baisTwo);
+            ResponseObject resReplicaTwo = (ResponseObject) oisTwo.readObject();
+
+//            String resReplicaTwo=new String(recievePacketTwo.getData()).trim();
+
+            byte[] dataThree = recievePacketThree.getData();
+            ByteArrayInputStream baisThree = new ByteArrayInputStream(dataThree);
+            ObjectInputStream oisThree = new ObjectInputStream(baisThree);
+            ResponseObject resReplicaThree = (ResponseObject) oisThree.readObject();
+
+//            String resReplicaThree=new String(recievePacketThree.getData()).trim();
+
+            byte[] dataFour = recievePacketFour.getData();
+            ByteArrayInputStream baisFour = new ByteArrayInputStream(dataFour);
+            ObjectInputStream oisFour = new ObjectInputStream(baisFour);
+            ResponseObject resReplicaFour = (ResponseObject) oisFour.readObject();
+
+//            String resReplicaFour=new String(recievePacketFour.getData()).trim();
+
+            checkResponseFromReplicas(resReplicaOne.responseMessage,resReplicaTwo.responseMessage,
+                    resReplicaThree.responseMessage,resReplicaFour.responseMessage);
+            response=majorityResponse(resReplicaOne.responseMessage,resReplicaTwo.responseMessage,
+                    resReplicaThree.responseMessage,resReplicaFour.responseMessage);
+
+//            byte [] errorReplicaInfoByteArray=new byte[1024];
             //check for a software failure
             String softwareFailureReplicaInfo="";
             if (faultReplicaOne){
@@ -199,6 +234,8 @@ public class FrontendService implements FrontendInterface{
         } catch (SocketException | UnknownHostException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -298,7 +335,7 @@ public class FrontendService implements FrontendInterface{
     }
 
     public String getRequestFromClient(RequestObject requestObject) {
-        return forwardMessageToSequencer("Hello");
+        return forwardMessageToSequencer(requestObject);
     }
     public String sendSoftwareFailureMsgToRM(DatagramSocket socket, DatagramPacket packet, byte[] softwareFailureByteArray) throws IOException {
         InetAddress addressReplicaOne=packet.getAddress();

@@ -241,7 +241,7 @@ public class Client  {
                     }
                     case 4:
                     {
-                        System.out.println("Please enter Movie ID");
+                        System.out.println("Please enter old Movie ID");
                         String bookMovieID = sc2.nextLine();
                         System.out.println("Please enter new Movie ID");
                         String newBookMovieID = sc2.nextLine();
@@ -250,7 +250,8 @@ public class Client  {
                         System.out.println("Please enter new No of Tickets to Book");
                         int newBookNumberOfTickets = Integer.parseInt(sc2.nextLine());
 //                        log="Change Movie Tickets";
-                        requestObject.movieID = bookMovieID;
+                        requestObject.oldMovieID = bookMovieID;
+                        requestObject.movieID = newBookMovieID;
                         requestObject.movieName = newBookMovieName;
                         requestObject.noOfTickets = newBookNumberOfTickets;
                         requestObject.requestType = "exchangeMovieTickets";

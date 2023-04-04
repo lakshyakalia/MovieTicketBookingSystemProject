@@ -1,16 +1,19 @@
 package models;
 
-public class RequestObject implements java.io.Serializable {
+import java.net.HttpURLConnection;
+
+public class ResponseObject implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
-    public RequestObject(){
+    public ResponseObject(){
 
     }
-    public String requestType;
+    public String response;
     public String currentUser;
     public String movieID;
-    public String oldMovieID;
     public String movieName;
     public int bookingCapacity;
     public int noOfTickets;
     public int requestCount;
+    public int responseCode;
+    public String responseMessage;
 }
