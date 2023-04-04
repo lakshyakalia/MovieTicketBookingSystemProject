@@ -49,7 +49,7 @@ public class ReplicaManagerOne {
                 ObjectInputStream ois = new ObjectInputStream(bais);
                 RequestObject received = (RequestObject) ois.readObject();
 
-//                recieved=new String(packet.getData(),0,packet.getLength()).trim().toString();
+//              recieved=new String(packet.getData(),0,packet.getLength()).trim().toString();
                 System.out.println("Repica One recieved... "+received);
 
                 if("end".equals(received)) {
@@ -91,7 +91,7 @@ public class ReplicaManagerOne {
                 //Send Response to the frontend
                 String toFrontEnd="Ticket Booked Successfully";
                 DatagramSocket toFrontEndSocket=new DatagramSocket();
-//                byte[] byteMessage=toFrontEnd.getBytes();
+//              byte[] byteMessage=toFrontEnd.getBytes();
 
                 // Serialize the object into a byte array
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();

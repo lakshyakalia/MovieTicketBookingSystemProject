@@ -1,0 +1,21 @@
+06-03-2023 16:22:33 : bookMovieTickets : ATWC2022 ATWM070323 Avatar 4 :  : Tickets Booked.
+06-03-2023 16:22:39 : getBookingSchedule : ATWC2022 :  : Tickets booked for movie: Avatar at: {ATWM070323=4}
+
+
+
+06-03-2023 16:23:23 : exchangeMovieTickets : ATWC2022 OUTM070323 ATWM070323 Avatar 2 :  : No booking found for user.
+06-03-2023 16:24:02 : exchangeMovieTickets : ATWC2022 ATWM070323 OUTM070323 Avatar 2 :  : Movie Tickets Exchanged!
+06-03-2023 16:24:07 : getBookingSchedule : ATWC2022 :  : Tickets booked for movie: Avatar at: {ATWM070323=2}
+
+Tickets booked for movie: Avatar at: {OUTM070323=2}
+
+06-03-2023 16:24:33 : exchangeMovieTickets : ATWC2022 OUTM070323 ATWM070323 Avatar 2 :  : Movie Tickets Exchanged!
+06-03-2023 16:24:35 : getBookingSchedule : ATWC2022 :  : Tickets booked for movie: Avatar at: {ATWM070323=4}
+
+Tickets booked for movie: Avatar at: {}
+
+06-03-2023 16:25:07 : exchangeMovieTickets : ATWC2022 ATWM070323 OUTM070323 Avatar 2 :  : Movie Tickets Exchanged!
+06-03-2023 16:25:09 : getBookingSchedule : ATWC2022 :  : Tickets booked for movie: Avatar at: {ATWM070323=2}
+
+Tickets booked for movie: Avatar at: {OUTM070323=2}
+
