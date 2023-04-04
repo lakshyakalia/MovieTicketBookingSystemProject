@@ -1,4 +1,4 @@
-package ReplicaManagerFour;
+package replicaManagers.ReplicaManagerFour;
 import constants.Constants;
 
 import java.io.IOException;

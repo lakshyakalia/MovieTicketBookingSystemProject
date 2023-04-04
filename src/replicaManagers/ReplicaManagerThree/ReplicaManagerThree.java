@@ -1,4 +1,4 @@
-package ReplicaManagerTwo;
+package replicaManagers.ReplicaManagerThree;
 
 import constants.Constants;
 
@@ -7,13 +7,16 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.util.HashMap;
 
-public class ReplicaManagerTwo {
+public class ReplicaManagerThree {
 
     private static int softwareFailureCount=0;
+    HashMap<Integer,String> requestSequenceMap=new HashMap<>();
+    static int expectedSequence=0;
     public static void main(String[] args) throws IOException {
-        System.out.println("Replica Manager Two Started");
         while(true){
+            System.out.println("Replica Manager Three Started");
             recieveMulticstMessage();
         }
     }
@@ -29,7 +32,7 @@ public class ReplicaManagerTwo {
                 DatagramPacket packet=new DatagramPacket(recieveMessage,recieveMessage.length);
                 multicastSocket.receive(packet);
                 recieved=new String(packet.getData(),0,packet.getLength()).trim().toString();
-                System.out.println("Repica Two recieved... "+recieved);
+                System.out.println("Repica Three recieved... "+recieved);
                 if("end".equals(recieved)) {
                     break;
                 }
@@ -42,7 +45,7 @@ public class ReplicaManagerTwo {
                 DatagramSocket toFrontEndSocket=new DatagramSocket();
                 byte[] byteMessage=toFrontEnd.getBytes();
                 InetAddress ia=InetAddress.getLocalHost();
-                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaTwoPort);
+                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaThreePort);
                 toFrontEndSocket.send(packetToFrontend);
 
                 //Recieve the update from the Frontend
@@ -59,6 +62,7 @@ public class ReplicaManagerTwo {
             throw new RuntimeException(e);
         }
     }
+
     public static void checkErrorResponseFromFrontend(String checkString){
         if(checkString.equals("SoftwareFailure")){
             softwareFailureCount++;

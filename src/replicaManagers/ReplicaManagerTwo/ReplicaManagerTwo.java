@@ -1,4 +1,4 @@
-package ReplicaManagerOne;
+package replicaManagers.ReplicaManagerTwo;
 
 import constants.Constants;
 
@@ -7,18 +7,13 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-public class ReplicaManagerOne {
-    HashMap<Integer,String> requestSequenceMap=new HashMap<>();
-    static int expectedSequence=0;
+public class ReplicaManagerTwo {
+
     private static int softwareFailureCount=0;
-    private static int requestCount=1;
-    private static ArrayList<String> requestList=new ArrayList<>();
     public static void main(String[] args) throws IOException {
+        System.out.println("Replica Manager Two Started");
         while(true){
-            System.out.println("Replica Manager One Started");
             recieveMulticstMessage();
         }
     }
@@ -34,49 +29,23 @@ public class ReplicaManagerOne {
                 DatagramPacket packet=new DatagramPacket(recieveMessage,recieveMessage.length);
                 multicastSocket.receive(packet);
                 recieved=new String(packet.getData(),0,packet.getLength()).trim().toString();
-                System.out.println("Repica One recieved... "+recieved);
-
+                System.out.println("Repica Two recieved... "+recieved);
                 if("end".equals(recieved)) {
                     break;
                 }
                 System.out.println(recieved);
 
-                boolean flag=false;
-                int index = 0;
-                if(requestList.size()>0){
-                    for (String s:requestList) {
-                        if(Integer.parseInt(s.split(";")[s.split(";").length-1])== requestCount){
-                            flag = true;
-                            index = requestList.indexOf(s);
-                            break;
-                        }
-                    }
-
-                }
-                if(flag){
-                    requestCount++;
-                    //TODO: do required operations in the replicas
-                    requestList.remove(index);
-                }
-                else if (Integer.parseInt(recieved.split(";")[recieved.split(";").length-1])== requestCount ) {
-                    requestCount++;
-                    //TODO: do required operations in the replicas
-                }
-                else{
-                    requestList.add(recieved);
-                }
-
-
+                //do required operations in the replicas
 
                 //Send Response to the frontend
                 String toFrontEnd="Ticket Booked Successfully";
                 DatagramSocket toFrontEndSocket=new DatagramSocket();
                 byte[] byteMessage=toFrontEnd.getBytes();
                 InetAddress ia=InetAddress.getLocalHost();
-                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaOnePort);
+                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaTwoPort);
                 toFrontEndSocket.send(packetToFrontend);
 
-                //Recieve the update from the frontend about the response
+                //Recieve the update from the Frontend
                 byte[] byteFromFrontend=new byte[1024];
                 DatagramPacket packetFromFrontend=new DatagramPacket(byteFromFrontend,byteFromFrontend.length);
                 toFrontEndSocket.receive(packetFromFrontend);
@@ -100,7 +69,7 @@ public class ReplicaManagerOne {
 //            System.out.println("Error in the response from the frontend");
         }
         else if(checkString.equals("CrashFailure")){
-                System.out.println("Crash Failure");
+            System.out.println("Crash Failure");
 //            TODO: Replace instance of replica
         }
     }
