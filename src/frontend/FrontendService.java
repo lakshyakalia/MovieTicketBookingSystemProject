@@ -55,12 +55,16 @@ public class FrontendService implements FrontendInterface{
             DatagramPacket packet=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.sequencerPort);
             socket.send(packet);
 
+            System.out.println("IM HERE");
+
             //receive a message via UDP from the replicas
             //socket to communicate with replica1
             DatagramSocket socketForReplicaOne=new DatagramSocket(Constants.listenReplicaOnePort);
+            System.out.println("IM HERE 1");
             socketForReplicaOne.setSoTimeout(10000);
             //socket to communicate with replica2
             DatagramSocket socketForReplicaTwo=new DatagramSocket(Constants.listenReplicaTwoPort);
+            System.out.println("IM HERE 2");
             socketForReplicaOne.setSoTimeout(10000);
             //socket to communicate with replica3
             DatagramSocket socketForReplicaThree=new DatagramSocket(Constants.listenReplicaThreePort);
@@ -114,6 +118,7 @@ public class FrontendService implements FrontendInterface{
             ByteArrayInputStream baisOne = new ByteArrayInputStream(dataOne);
             ObjectInputStream oisOne = new ObjectInputStream(baisOne);
             ResponseObject resReplicaOne = (ResponseObject) oisOne.readObject();
+            System.out.println(resReplicaOne.responseMessage);
 
 //            String resReplicaOne=new String(recievePacketOne.getData()).trim();
 

@@ -56,6 +56,7 @@ public class ReplicaManagerOne {
                     break;
                 }
                 System.out.println(received);
+                String serverPort = getServerPort(received.currentUser);
 
                 boolean flag=false;
                 int index = 0;
@@ -69,7 +70,7 @@ public class ReplicaManagerOne {
                     }
 
                 }
-                ResponseObject response = null;
+                ResponseObject response = new ResponseObject();
                 if(flag){
                     requestCount++;
                     //TODO: do required operations in the replicas
@@ -135,19 +136,19 @@ public class ReplicaManagerOne {
 
     public static void initializeServices() throws MalformedURLException {
         URL atwaterURL = new URL("http://localhost:8090/atwater?wsdl");
-        QName atwaterQName = new QName("http://Services.replicas.ReplicaOne.replica/", "MovieTicketServiceService");
+        QName atwaterQName = new QName("http://Services.replica.ReplicaOne.replicas/", "MovieTicketServiceService");
         atwService = Service.create(atwaterURL, atwaterQName);
 
         URL outremontURL = new URL("http://localhost:8091/outremont?wsdl");
-        QName outremontQName = new QName("http://Services.replicas.ReplicaOne.replica/", "MovieTicketServiceService");
+        QName outremontQName = new QName("http://Services.replica.ReplicaOne.replicas/", "MovieTicketServiceService");
         outService = Service.create(outremontURL, outremontQName);
 
         URL verdunURL = new URL("http://localhost:8092/verdun?wsdl");
-        QName verdunQName = new QName("http://Services.replicas.ReplicaOne.replica/", "MovieTicketServiceService");
+        QName verdunQName = new QName("http://Services.replica.ReplicaOne.replicas/", "MovieTicketServiceService");
         verService = Service.create(verdunURL,verdunQName);
     }
     public static ResponseObject sendRequestToReplica(RequestObject request){
-        ResponseObject res = null;
+        ResponseObject res = new ResponseObject();
         switch (request.requestType){
             case "addMovieSlots":{
                 res.responseMessage = movieRef.addMovieSlots(request.movieID, request.movieName, request.bookingCapacity);
@@ -184,5 +185,20 @@ public class ReplicaManagerOne {
             }
         }
         return res;
+    }
+    public static String getServerPort(String userID){
+        String serverSubstring = userID.substring(0,3);
+        String role = userID.substring(3,4);
+        if (serverSubstring.equalsIgnoreCase("ATW")) {
+            movieRef = atwService.getPort(MovieInterface.class);
+            return "atwater";
+        } else if (serverSubstring.equalsIgnoreCase("OUT")) {
+            movieRef = outService.getPort(MovieInterface.class);
+            return "outremont";
+        } else if (serverSubstring.equalsIgnoreCase("VER")) {
+            movieRef = verService.getPort(MovieInterface.class);
+            return "verdun";
+        }
+        return "false";
     }
 }
