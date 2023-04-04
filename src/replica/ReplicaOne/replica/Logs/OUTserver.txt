@@ -1,0 +1,184 @@
+06-03-2023 15:49:04 : addMovieSlots : Movie- AVATAR Show at- OUTM060323 77 : Passed : 77 slots for movie AVATAR for movie ID OUTM060323 have been added.
+06-03-2023 15:49:37 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 15:49:51 : bookMovieTickets : ATWC1234 OUTM060323 AVATAR 2 : Success : Tickets Booking Booked
+06-03-2023 15:49:54 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 15:50:21 : cancelMovieTickets : ATWC1234 OUTM060323 AVATAR 2 : Passed : Tickets successfully cancelled!
+06-03-2023 15:50:21 : exchangeTickets : AVATAR : Passed : Tickets exchanged on OUT server.
+06-03-2023 15:50:23 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 16:20:16 : listMovieShowAvailabilityUDP : Avatar : Passed : List Movie Shows Availability using UDP from OUT server.
+06-03-2023 16:20:51 : addMovieSlots : Movie- Avatar Show at- OUTM070323 20 : Passed : 20 slots for movie Avatar for movie ID OUTM070323 have been added.
+06-03-2023 16:20:56 : listMovieShowsAvailability : Avatar : Passed : Movie Show: OUTM070323 Capacity: 20
+
+Movie Show: ATWM070323 Capacity: 20
+
+06-03-2023 16:21:15 : bookMovieTickets : OUTA2022 OUTM070323 Avatar 4 : Success : Tickets Booking Booked
+06-03-2023 16:21:20 : getBookingSchedule : OUTA2022 : Passed : Tickets booked for movie: Avatar at: {OUTM070323=4}
+
+
+
+06-03-2023 16:22:39 : getBookingScheduleUDP : ATWC2022 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 16:23:23 : exchangeTickets : ATWC2022 OUTM070323 ATWM070323 Avatar 2 : Failed : No booking found for user.
+06-03-2023 16:24:02 : bookMovieTickets : ATWC2022 OUTM070323 Avatar 2 : Success : Tickets Booking Booked
+06-03-2023 16:24:07 : getBookingScheduleUDP : ATWC2022 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 16:24:33 : cancelMovieTickets : ATWC2022 OUTM070323 Avatar 2 : Passed : Tickets successfully cancelled!
+06-03-2023 16:24:33 : exchangeTickets : Avatar : Passed : Tickets exchanged on OUT server.
+06-03-2023 16:24:35 : getBookingScheduleUDP : ATWC2022 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 16:25:07 : bookMovieTickets : ATWC2022 OUTM070323 Avatar 2 : Success : Tickets Booking Booked
+06-03-2023 16:25:09 : getBookingScheduleUDP : ATWC2022 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 16:29:40 : listMovieShowAvailabilityUDP : Avatar : Passed : List Movie Shows Availability using UDP from OUT server.
+06-03-2023 20:20:07 : addMovieSlots : Movie- AVATAR Show at- OUTM060323 66 : Passed : 66 slots for movie AVATAR for movie ID OUTM060323 have been added.
+06-03-2023 20:29:09 : addMovieSlots : Movie- AVATAR Show at- OUTM060323 55 : Passed : 55 slots for movie AVATAR for movie ID OUTM060323 have been added.
+06-03-2023 20:29:26 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 20:30:13 : addMovieSlots : Movie- AVATAR Show at- OUTE060323 90 : Passed : 90 slots for movie AVATAR for movie ID OUTE060323 have been added.
+06-03-2023 20:30:22 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 20:30:35 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 20:31:02 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 20:31:20 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 20:31:21 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+06-03-2023 20:32:30 : addMovieSlots : Movie- AVATAR Show at- OUTM060323 60 : Passed : 60 slots for movie AVATAR for movie ID OUTM060323 have been added.
+06-03-2023 20:33:03 : bookMovieTickets : ATWC1234 OUTM060323 AVATAR 2 : Success : Tickets Booking Booked
+06-03-2023 20:33:05 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+13-03-2023 19:20:26 : bookMovieTickets : OUTC1234 ATWM130323 AVATAR 4 : Failed : You cannot book more than 3 ticket in other servers.
+22-03-2023 17:14:04 : listMovieShowAvailabilityUDP : AVATAR : Passed : List Movie Shows Availability using UDP from OUT server.
+22-03-2023 17:42:17 : addMovieSlots : Movie- AVATAR Show at- OUTM220323 30 : Passed : 30 slots for movie AVATAR for movie ID OUTM220323 have been added.
+22-03-2023 17:42:33 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 17:42:45 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 17:42:50 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 17:44:25 : addMovieSlots : Movie- AVATAR Show at- OUTE220323 5 : Passed : 5 slots for movie AVATAR for movie ID OUTE220323 have been added.
+22-03-2023 17:44:58 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 17:45:24 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 17:52:15 : addMovieSlots : Movie- AVATAR Show at- OUTE220323 10 : Passed : 10 slots for movie AVATAR for movie ID OUTE220323 have been added.
+22-03-2023 17:53:02 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 17:53:13 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 17:53:13 : getBookingSchedule : ATWC1234 : Passed : 
+Tickets booked for movie: AVATAR at: {ATWM220323=2}
+
+22-03-2023 17:53:13 : bookMovieTickets : ATWC1234 OUTE220323 AVATAR 3 : Success : Tickets Booking Booked
+22-03-2023 18:10:18 : addMovieSlots : Movie- AVATAR Show at- OUTM220323 50 : Passed : 50 slots for movie AVATAR for movie ID OUTM220323 have been added.
+22-03-2023 18:26:33 : addMovieSlots : Movie- AVATAR Show at- OUTM220323 70 : Passed : 70 slots for movie AVATAR for movie ID OUTM220323 have been added.
+22-03-2023 18:26:49 : addMovieSlots : Movie- AVENGERS Show at- OUTE220323 99 : Passed : 99 slots for movie AVENGERS for movie ID OUTE220323 have been added.
+22-03-2023 18:29:14 : addMovieSlots : Movie- AVATAR Show at- OUTM220323 10 : Passed : 10 slots for movie AVATAR for movie ID OUTM220323 have been added.
+22-03-2023 18:29:32 : addMovieSlots : Movie- AVATAR Show at- OUTE220323 20 : Passed : 20 slots for movie AVATAR for movie ID OUTE220323 have been added.
+22-03-2023 18:30:09 : addMovieSlots : Movie- AVATAR Show at- OUTN220323 50 : Passed : 50 slots for movie AVATAR for movie ID OUTN220323 have been added.
+22-03-2023 18:30:39 : addMovieSlots : Movie- AVATAR Show at- OUTM240323 80 : Passed : 80 slots for movie AVATAR for movie ID OUTM240323 have been added.
+22-03-2023 18:31:05 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:31:05 : getBookingSchedule : ATWC1234 : Passed : 
+
+
+22-03-2023 18:31:05 : bookMovieTickets : ATWC1234 OUTM220323 AVATAR 2 : Success : Tickets Booking Booked
+22-03-2023 18:31:23 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:31:23 : getBookingSchedule : ATWC1234 : Passed : Tickets booked for movie: AVATAR at: {OUTM220323=2}
+
+
+
+22-03-2023 18:31:23 : bookMovieTickets : ATWC1234 OUTE220323 AVATAR 1 : Success : Tickets Booking Booked
+22-03-2023 18:31:38 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:31:38 : getBookingSchedule : ATWC1234 : Passed : Tickets booked for movie: AVATAR at: {OUTE220323=1, OUTM220323=2}
+
+
+
+22-03-2023 18:31:38 : bookMovieTickets : ATWC1234 OUTN220323 AVATAR 2 : Success : Tickets Booking Booked
+22-03-2023 18:33:25 : addMovieSlots : Movie- AVATAR Show at- OUTM220323 20 : Passed : 20 slots for movie AVATAR for movie ID OUTM220323 have been added.
+22-03-2023 18:33:31 : addMovieSlots : Movie- AVATAR Show at- OUTE220323 40 : Passed : 40 slots for movie AVATAR for movie ID OUTE220323 have been added.
+22-03-2023 18:33:44 : addMovieSlots : Movie- AVATAR Show at- OUTN220323 70 : Passed : 70 slots for movie AVATAR for movie ID OUTN220323 have been added.
+22-03-2023 18:33:56 : addMovieSlots : Movie- AVATAR Show at- OUTM230323 60 : Passed : 60 slots for movie AVATAR for movie ID OUTM230323 have been added.
+22-03-2023 18:34:10 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:34:10 : getBookingSchedule : ATWC1234 : Passed : 
+
+
+22-03-2023 18:34:10 : bookMovieTickets : ATWC1234 OUTM220323 AVATAR 2 : Success : Tickets Booking Booked
+22-03-2023 18:34:18 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:34:18 : getBookingSchedule : ATWC1234 : Passed : Tickets booked for movie: AVATAR at: {OUTM220323=2}
+
+
+
+22-03-2023 18:34:18 : bookMovieTickets : ATWC1234 OUTE220323 AVATAR 4 : Success : Tickets Booking Booked
+22-03-2023 18:34:27 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:34:27 : getBookingSchedule : ATWC1234 : Passed : Tickets booked for movie: AVATAR at: {OUTE220323=4, OUTM220323=2}
+
+
+
+22-03-2023 18:34:27 : bookMovieTickets : ATWC1234 OUTN220323 AVATAR 4 : Success : Tickets Booking Booked
+22-03-2023 18:34:38 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:34:38 : getBookingSchedule : ATWC1234 : Passed : Tickets booked for movie: AVATAR at: {OUTN220323=4, OUTE220323=4, OUTM220323=2}
+
+
+
+22-03-2023 18:34:38 : bookMovieTickets : ATWC1234 OUTM230323 AVATAR 7 : Passed : You cannot book more than 3 ticket in other servers.
+22-03-2023 18:37:16 : exchangeTickets : ATWC1234 OUTM230323 ATWM220323 AVATAR 3 : Failed : No booking found for user.
+22-03-2023 18:37:40 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:38:11 : cancelMovieTickets : ATWC1234 OUTM220323 AVATAR 2 : Passed : Tickets successfully cancelled!
+22-03-2023 18:38:11 : getBookingSchedule : ATWC1234 : Passed : Tickets booked for movie: AVATAR at: {OUTN220323=4, OUTE220323=4}
+
+
+
+22-03-2023 18:38:11 : bookMovieTickets : ATWC1234 ATWM220323 AVATAR 2 : Passed : You cannot book more than 3 ticket in other servers.
+22-03-2023 18:38:11 : exchangeTickets : AVATAR : Passed : Tickets exchanged on OUT server.
+22-03-2023 18:38:13 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:40:29 : addMovieSlots : Movie- AVATAR Show at- OUTM230323 50 : Passed : 50 slots for movie AVATAR for movie ID OUTM230323 have been added.
+22-03-2023 18:40:41 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:42:38 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:45:20 : addMovieSlots : Movie- AVATAR Show at- OUTM230323 50 : Passed : 50 slots for movie AVATAR for movie ID OUTM230323 have been added.
+22-03-2023 18:45:34 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:47:18 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:47:18 : getBookingSchedule : ATWC1234 : Passed : 
+Tickets booked for movie: AVATAR at: {ATWM220323=4}
+
+22-03-2023 18:47:18 : bookMovieTickets : ATWC1234 OUTM230323 AVATAR 2 : Success : Tickets Booking Booked
+22-03-2023 18:50:42 : addMovieSlots : Movie- AVATAR Show at- OUTM230323 50 : Passed : 50 slots for movie AVATAR for movie ID OUTM230323 have been added.
+22-03-2023 18:50:56 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:51:49 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:51:49 : getBookingSchedule : ATWC1234 : Passed : 
+Tickets booked for movie: AVATAR at: {ATWM220323=1}
+
+22-03-2023 18:51:49 : bookMovieTickets : ATWC1234 OUTM230323 AVATAR 1 : Success : Tickets Booking Booked
+22-03-2023 18:52:10 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 18:56:09 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:05:44 : addMovieSlots : Movie- AVATAR Show at- OUTM230323 40 : Passed : 40 slots for movie AVATAR for movie ID OUTM230323 have been added.
+22-03-2023 19:06:00 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:06:02 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:06:22 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:11:16 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:11:18 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:11:31 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:13:31 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:13:44 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:17:32 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:17:41 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:17:44 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:19:29 : addMovieSlots : Movie- AVATAR Show at- OUTM220323 60 : Passed : 60 slots for movie AVATAR for movie ID OUTM220323 have been added.
+22-03-2023 19:19:40 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:20:10 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:20:26 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:22:30 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:22:30 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:22:32 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:28:08 : addMovieSlots : Movie- AVATAR Show at- OUTM220323 50 : Passed : 50 slots for movie AVATAR for movie ID OUTM220323 have been added.
+22-03-2023 19:28:24 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:28:41 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:28:41 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:28:45 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:29:41 : addMovieSlots : Movie- AVATAR Show at- OUTE220323 55 : Passed : 55 slots for movie AVATAR for movie ID OUTE220323 have been added.
+22-03-2023 19:29:58 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:30:24 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:30:24 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:30:35 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:33:17 : addMovieSlots : Movie- AVATAR Show at- OUTE220323 60 : Passed : 60 slots for movie AVATAR for movie ID OUTE220323 have been added.
+22-03-2023 19:33:36 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:34:19 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:34:19 : getBookingSchedule : ATWC1234 : Passed : 
+Tickets booked for movie: AVATAR at: {ATWM220323=2}
+
+22-03-2023 19:34:19 : bookMovieTickets : ATWC1234 OUTE220323 AVATAR 2 : Success : Tickets Booking Booked
+22-03-2023 19:34:36 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:34:55 : addMovieSlots : Movie- AVATAR Show at- OUTM220323 60 : Passed : 60 slots for movie AVATAR for movie ID OUTM220323 have been added.
+22-03-2023 19:35:39 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:35:49 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:37:38 : addMovieSlots : Movie- AVATAR Show at- OUTE220323 50 : Passed : 50 slots for movie AVATAR for movie ID OUTE220323 have been added.
+22-03-2023 19:37:51 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:38:08 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
+22-03-2023 19:38:08 : getBookingSchedule : ATWC1234 : Passed : 
+Tickets booked for movie: AVATAR at: {ATWM220323=6}
+
+22-03-2023 19:38:08 : bookMovieTickets : ATWC1234 OUTE220323 AVATAR 4 : Success : Tickets Booking Booked
+22-03-2023 19:38:11 : getBookingScheduleUDP : ATWC1234 : Passed : Getting Booking Schedule using UDP from OUT server.
