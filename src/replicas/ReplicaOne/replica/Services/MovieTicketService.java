@@ -530,7 +530,7 @@ public class MovieTicketService {
     }
     public void writeToLogFile(String operation, String params, String status, String response) {
         try {
-            FileWriter myLogWriter = new FileWriter("C:\\Users\\manish\\IdeaProjects\\FaultTolorentTicketMagementSystem\\src\\replicas\\ReplicaOne\\replica\\Logs\\"+file.get(this.serverName),true);
+            FileWriter myLogWriter = new FileWriter("C:\\Users\\yashb\\IdeaProjects\\MovieTicketBookingSystemProject\\MovieTicketBookingSystemProject\\src\\replicas\\ReplicaOne\\replica\\Logs\\"+file.get(this.serverName),true);
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             String log = dateFormat.format(LocalDateTime.now()) + " : " + operation + " : " + params + " : " + status
                     + " : " + response + "\n";
