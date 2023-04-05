@@ -65,13 +65,13 @@ public class FrontendService implements FrontendInterface{
             //socket to communicate with replica2
             DatagramSocket socketForReplicaTwo=new DatagramSocket(Constants.listenReplicaTwoPort);
             System.out.println("IM HERE 2");
-            socketForReplicaOne.setSoTimeout(10000);
+            socketForReplicaTwo.setSoTimeout(10000);
             //socket to communicate with replica3
             DatagramSocket socketForReplicaThree=new DatagramSocket(Constants.listenReplicaThreePort);
-            socketForReplicaOne.setSoTimeout(10000);
+            socketForReplicaThree.setSoTimeout(10000);
             //socket to communicate with replica4
             DatagramSocket socketForReplicaFour=new DatagramSocket(Constants.listenReplicaFourPort);
-            socketForReplicaOne.setSoTimeout(10000);
+            socketForReplicaFour.setSoTimeout(10000);
 
             String response="";
             byte [] recieveByteOne=new byte[1024];
@@ -120,15 +120,15 @@ public class FrontendService implements FrontendInterface{
             ResponseObject resReplicaOne = (ResponseObject) oisOne.readObject();
             System.out.println(resReplicaOne.responseMessage);
 
-//            String resReplicaOne=new String(recievePacketOne.getData()).trim();
+//          String resReplicaOne=new String(recievePacketOne.getData()).trim();
+//          Deserialize the byte array back into the original object
 
-            // Deserialize the byte array back into the original object
             byte[] dataTwo = recievePacketTwo.getData();
             ByteArrayInputStream baisTwo = new ByteArrayInputStream(dataTwo);
             ObjectInputStream oisTwo = new ObjectInputStream(baisTwo);
             ResponseObject resReplicaTwo = (ResponseObject) oisTwo.readObject();
 
-//            String resReplicaTwo=new String(recievePacketTwo.getData()).trim();
+//          String resReplicaTwo=new String(recievePacketTwo.getData()).trim();
 
             byte[] dataThree = recievePacketThree.getData();
             ByteArrayInputStream baisThree = new ByteArrayInputStream(dataThree);
@@ -228,7 +228,6 @@ public class FrontendService implements FrontendInterface{
 //            int portReplicaFour=recievePacketFour.getPort();
 //            DatagramPacket packetForFour=new DatagramPacket(errorReplicaInfoByteArray,errorReplicaInfoByteArray.length,addressReplicaFour,portReplicaFour);
 //            socketForReplicaFour.send(packetForFour);
-
 
             socketForReplicaOne.close();
             socketForReplicaTwo.close();
