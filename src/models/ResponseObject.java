@@ -16,4 +16,19 @@ public class ResponseObject implements java.io.Serializable {
     public int requestCount;
     public int responseCode;
     public String responseMessage;
+
+    @Override
+    public String toString() {
+        return "ResponseObject{" +
+                "response='" + response + '\'' +
+                ", currentUser='" + currentUser + '\'' +
+                ", movieID='" + movieID + '\'' +
+                ", movieName='" + movieName + '\'' +
+                ", bookingCapacity=" + bookingCapacity +
+                ", noOfTickets=" + noOfTickets +
+                ", requestCount=" + requestCount +
+                ", responseCode=" + responseCode +
+                ", responseMessage='" + responseMessage + '\'' +
+                '}';
+    }
 }
