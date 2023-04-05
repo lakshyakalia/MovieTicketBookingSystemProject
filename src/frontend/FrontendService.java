@@ -127,6 +127,7 @@ public class FrontendService implements FrontendInterface{
             ByteArrayInputStream baisTwo = new ByteArrayInputStream(dataTwo);
             ObjectInputStream oisTwo = new ObjectInputStream(baisTwo);
             ResponseObject resReplicaTwo = (ResponseObject) oisTwo.readObject();
+            System.out.println(resReplicaTwo.responseMessage);
 
 //          String resReplicaTwo=new String(recievePacketTwo.getData()).trim();
 

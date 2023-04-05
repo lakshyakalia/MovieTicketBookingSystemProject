@@ -1,0 +1,10 @@
+06-03-2023 16:20:51 : addMovieSlots : OUTA2022 OUTM070323 Avatar 20 :  : Movie Slot Added.
+06-03-2023 16:20:56 : listMovieShowsAvailability : OUTA2022 Avatar :  : Movie Show: OUTM070323 Capacity: 20
+
+Movie Show: ATWM070323 Capacity: 20
+
+06-03-2023 16:21:15 : bookMovieTickets : OUTA2022 OUTM070323 Avatar 4 :  : Tickets Booked.
+06-03-2023 16:21:20 : getBookingSchedule : OUTA2022 :  : Tickets booked for movie: Avatar at: {OUTM070323=4}
+
+
+
