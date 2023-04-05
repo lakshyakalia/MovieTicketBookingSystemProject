@@ -13,4 +13,18 @@ public class RequestObject implements java.io.Serializable {
     public int bookingCapacity;
     public int noOfTickets;
     public int requestCount;
+
+    @Override
+    public String toString() {
+        return "RequestObject{" +
+                "requestType='" + requestType + '\'' +
+                ", currentUser='" + currentUser + '\'' +
+                ", movieID='" + movieID + '\'' +
+                ", oldMovieID='" + oldMovieID + '\'' +
+                ", movieName='" + movieName + '\'' +
+                ", bookingCapacity=" + bookingCapacity +
+                ", noOfTickets=" + noOfTickets +
+                ", requestCount=" + requestCount +
+                '}';
+    }
 }
