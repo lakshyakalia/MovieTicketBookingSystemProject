@@ -85,7 +85,7 @@ public class ReplicaManagerTwo {
                 else{
                     requestList.add(received);
                 }
-
+                System.out.println(response);
 
 
                 //Send Response to the frontend
@@ -100,7 +100,7 @@ public class ReplicaManagerTwo {
                 byte[] byteMessage = baos.toByteArray();
 
                 InetAddress ia=InetAddress.getLocalHost();
-                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaTwoPort);
+                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaFourPort);
                 toFrontEndSocket.send(packetToFrontend);
 
                 //Receive the update from the frontend about the response in case of Error
