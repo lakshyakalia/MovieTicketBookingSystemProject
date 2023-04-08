@@ -243,6 +243,8 @@ public class Client  {
                     {
                         System.out.println("Please enter old Movie ID");
                         String bookMovieID = sc2.nextLine();
+                        System.out.println("Please enter old Movie Name");
+                        String oldMovieName = sc2.nextLine();
                         System.out.println("Please enter new Movie ID");
                         String newBookMovieID = sc2.nextLine();
                         System.out.println("Please enter new Movie Name");
@@ -251,6 +253,7 @@ public class Client  {
                         int newBookNumberOfTickets = Integer.parseInt(sc2.nextLine());
 //                        log="Change Movie Tickets";
                         requestObject.oldMovieID = bookMovieID;
+                        requestObject.oldMovieName = oldMovieName;
                         requestObject.movieID = newBookMovieID;
                         requestObject.movieName = newBookMovieName;
                         requestObject.noOfTickets = newBookNumberOfTickets;

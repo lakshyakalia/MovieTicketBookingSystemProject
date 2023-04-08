@@ -148,16 +148,16 @@ public class ReplicaManagerTwo {
     }
 
     public static void initializeServices() throws MalformedURLException {
-        URL atwaterURL = new URL("http://localhost:8090/atwater?wsdl");
-        QName atwaterQName = new QName("http://Services.replica.ReplicaTwo.replicas/", "ImplementationService");
+        URL atwaterURL = new URL("http://localhost:5099/DMTBS?wsdl");
+        QName atwaterQName = new QName("http://Implementation.replica.ReplicaTwo.replicas/", "ImplementationService");
         atwService = Service.create(atwaterURL, atwaterQName);
 
-        URL outremontURL = new URL("http://localhost:8091/outremont?wsdl");
-        QName outremontQName = new QName("http://Services.replica.ReplicaTwo.replicas/", "ImplementationService");
+        URL outremontURL = new URL("http://localhost:5097/DMTBS?wsdl");
+        QName outremontQName = new QName("http://Implementation.replica.ReplicaTwo.replicas/", "ImplementationService");
         outService = Service.create(outremontURL, outremontQName);
 
-        URL verdunURL = new URL("http://localhost:8092/verdun?wsdl");
-        QName verdunQName = new QName("http://Services.replica.ReplicaTwoplicas/", "ImplementationService");
+        URL verdunURL = new URL("http://localhost:5098/DMTBS?wsdl");
+        QName verdunQName = new QName("http://Implementation.replica.ReplicaTwo.replicas/", "ImplementationService");
         verService = Service.create(verdunURL,verdunQName);
     }
     public static ResponseObject sendRequestToReplica(RequestObject request) throws ParseException, ExecutionException, InterruptedException, RemoteException {
