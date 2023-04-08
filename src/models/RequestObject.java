@@ -9,6 +9,7 @@ public class RequestObject implements java.io.Serializable {
     public String currentUser;
     public String movieID;
     public String oldMovieID;
+    public String oldMovieName;
     public String movieName;
     public int bookingCapacity;
     public int noOfTickets;

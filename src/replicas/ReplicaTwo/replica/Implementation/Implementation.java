@@ -27,7 +27,7 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 
 
-@WebService(endpointInterface = "Interface.AdminInterface")
+@WebService(endpointInterface = "replicas.ReplicaTwo.replica.Interface.AdminInterface")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class Implementation  implements AdminInterface {
 
