@@ -83,7 +83,7 @@ public class MovieTicketService {
         log = "Slots added.";
         Status = "Passed";
         writeToLogFile("addMovieSlots","Movie- " + movieName+" Show at- "+movieID+" "+bookingCapacity,Status,bookingCapacity + " slots for movie " + movieName + " for movie ID " + movieID + " have been added.");
-        return "Movie Slot Added.";
+        return "Movie Slot Added by yash";
     }
     public String removeMovieSlots(String movieID, String movieName){
         log = "Slots not deleted.";
