@@ -106,7 +106,7 @@ public class ReplicaManagerTwo {
                 oos.writeObject(response);
                 byte[] byteMessage = baos.toByteArray();
 
-                InetAddress ia=InetAddress.getByName("192.168.0.169");
+                InetAddress ia=InetAddress.getByName("172.20.10.4");
                 DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaThreePort);
                 toFrontEndSocket.send(packetToFrontend);
 
