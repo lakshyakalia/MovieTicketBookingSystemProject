@@ -25,11 +25,19 @@ public class ReplicaManagerThree {
     public static Server_Interface movieRef;
     private static ArrayList<RequestObject> requestList=new ArrayList<>();
     public static void main(String[] args) throws IOException {
-        while(true){
-            System.out.println("Replica Manager Three Started");
+git            System.out.println("Replica Manager Three Started");
             initializeServices();
-            receiveMulticastMessage();
-        }
+            Thread thread = new Thread(new Runnable() {
+                public void run() {
+                    // code to be executed in this thread
+                    try {
+                        receiveMulticastMessage();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            thread.start();
     }
     public static void receiveMulticastMessage() throws IOException {
         try{
@@ -99,7 +107,7 @@ public class ReplicaManagerThree {
                 oos.writeObject(response);
                 byte[] byteMessage = baos.toByteArray();
 
-                InetAddress ia=InetAddress.getByName("192.168.0.169");
+                InetAddress ia=InetAddress.getByName("172.20.10.7");
 //                System.out.println(ia);
                 DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaTwoPort);
                 toFrontEndSocket.send(packetToFrontend);
