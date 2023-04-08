@@ -26,7 +26,7 @@ public class ReplicaManagerThree {
     private static ArrayList<RequestObject> requestList=new ArrayList<>();
     public static void main(String[] args) throws IOException {
         while(true){
-            System.out.println("Replica Manager One Started");
+            System.out.println("Replica Manager Three Started");
             initializeServices();
             receiveMulticastMessage();
         }
@@ -138,15 +138,15 @@ public class ReplicaManagerThree {
     }
 
     public static void initializeServices() throws MalformedURLException {
-        URL atwaterURL = new URL("http://localhost:9090/atwater?wsdl");
-        QName atwaterQName = new QName("http://Services.replica.Replicathree.replicas/", "implementationService");
+        URL atwaterURL = new URL("http://localhost:9090/DMTBS?wsdl");
+        QName atwaterQName = new QName("http://Services.replica.ReplicaThree.replicas/", "implementationService");
         atwService = Service.create(atwaterURL, atwaterQName);
 
-        URL outremontURL = new URL("http://localhost:9091/outremont?wsdl");
+        URL outremontURL = new URL("http://localhost:9091/DMTBS?wsdl");
         QName outremontQName = new QName("http://Services.replica.ReplicaThree.replicas/", "implementationService");
         outService = Service.create(outremontURL, outremontQName);
 
-        URL verdunURL = new URL("http://localhost:9092/verdun?wsdl");
+        URL verdunURL = new URL("http://localhost:9092/DMTBS?wsdl");
         QName verdunQName = new QName("http://Services.replica.ReplicaThree.replicas/", "implementationService");
         verService = Service.create(verdunURL,verdunQName);
     }

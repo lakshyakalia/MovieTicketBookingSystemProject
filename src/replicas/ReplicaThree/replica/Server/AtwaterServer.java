@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class AtwaterServer {
-    private static final String serverEndPoint = "http://localhost:8090/atwater";
+
     public static void main(String[] args) throws RemoteException {
 
         implementation i = new implementation();
@@ -49,7 +49,7 @@ public class AtwaterServer {
 
 
         try {
-            Endpoint ep = Endpoint.publish("http://localhost:"+9090+ "/atwater",i);
+            Endpoint ep = Endpoint.publish("http://localhost:"+9090+"/DMTBS",i);
             System.out.println(ep.isPublished());
             System.out.println("Atwater server ready");
         } catch (Exception e) {

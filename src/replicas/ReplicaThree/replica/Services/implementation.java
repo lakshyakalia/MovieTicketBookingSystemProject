@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 
 
-@WebService(endpointInterface = "Interface.Server_Interface")
+@WebService(endpointInterface = "replicas.ReplicaThree.replica.Interface.Server_Interface")
 @SOAPBinding(style = SOAPBinding.Style.RPC)
 public class implementation extends UnicastRemoteObject implements Server_Interface {
 
