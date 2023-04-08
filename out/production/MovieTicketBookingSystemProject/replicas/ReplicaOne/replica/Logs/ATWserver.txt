@@ -386,3 +386,4 @@ Tickets booked for movie: AVATAR at: {OUTE220323=4}
 04-04-2023 00:51:21 : addMovieSlots : Movie- AVATAR Show at- ATWM040423 20 : Passed : 20 slots for movie AVATAR for movie ID ATWM040423 have been added.
 04-04-2023 00:53:18 : addMovieSlots : Movie- AVATAR Show at- ATWM040423 20 : Passed : 20 slots for movie AVATAR for movie ID ATWM040423 have been added.
 04-04-2023 10:34:03 : addMovieSlots : Movie- Avatar Show at- ATWM050423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM050423 have been added.
+05-04-2023 15:20:15 : addMovieSlots : Movie- Avatar Show at- ATWM050423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM050423 have been added.

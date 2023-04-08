@@ -99,8 +99,8 @@ public class ReplicaManagerFour {
                 oos.writeObject(response);
                 byte[] byteMessage = baos.toByteArray();
 
-                InetAddress ia=InetAddress.getLocalHost();
-//              InetAddress ia=InetAddress.getByName("192.168.0.169");
+//              InetAddress ia=InetAddress.getLocalHost();
+                InetAddress ia=InetAddress.getByName("172.20.10.7");
 //              System.out.println(ia);
                 DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaFourPort);
                 toFrontEndSocket.send(packetToFrontend);
@@ -177,7 +177,7 @@ public class ReplicaManagerFour {
                 break;
             }
             case "exchangeMovieTickets":{
-                res.responseMessage = movieRef.exchangeTickets(request.currentUser, request.oldMovieID, request.movieID, request.movieName, request.noOfTickets);
+                res.responseMessage = movieRef.exchangeTickets(request.currentUser,request.oldMovieName, request.oldMovieID, request.movieID, request.movieName, request.noOfTickets);
                 break;
             }
             default:{

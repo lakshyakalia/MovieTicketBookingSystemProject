@@ -99,7 +99,7 @@ public class ReplicaManagerOne {
                 oos.writeObject(response);
                 byte[] byteMessage = baos.toByteArray();
 
-                InetAddress ia=InetAddress.getByName("192.168.0.169");
+                InetAddress ia=InetAddress.getByName("172.20.10.7");
 //                System.out.println(ia);
                 DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaTwoPort);
                 toFrontEndSocket.send(packetToFrontend);
