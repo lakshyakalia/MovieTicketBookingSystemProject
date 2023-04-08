@@ -83,7 +83,7 @@ public class MovieTicketService {
         log = "Slots added.";
         Status = "Passed";
         writeToLogFile("addMovieSlots","Movie- " + movieName+" Show at- "+movieID+" "+bookingCapacity,Status,bookingCapacity + " slots for movie " + movieName + " for movie ID " + movieID + " have been added.");
-        return "Movie Slot Added by yash";
+        return "Movie Slot Added.";
     }
     public String removeMovieSlots(String movieID, String movieName){
         log = "Slots not deleted.";
@@ -530,7 +530,7 @@ public class MovieTicketService {
     }
     public void writeToLogFile(String operation, String params, String status, String response) {
         try {
-            FileWriter myLogWriter = new FileWriter("C:\\Users\\yashb\\IdeaProjects\\MovieTicketBookingSystemProject\\MovieTicketBookingSystemProject\\src\\replicas\\ReplicaOne\\replica\\Logs\\"+file.get(this.serverName),true);
+            FileWriter myLogWriter = new FileWriter("C:\\Users\\14389\\Documents\\DSD\\MovieTicketBookingSystemProject\\src\\replicas\\ReplicaOne\\replica\\Logs\\"+file.get(this.serverName),true);
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             String log = dateFormat.format(LocalDateTime.now()) + " : " + operation + " : " + params + " : " + status
                     + " : " + response + "\n";

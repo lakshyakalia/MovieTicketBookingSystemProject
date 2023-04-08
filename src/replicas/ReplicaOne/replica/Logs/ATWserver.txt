@@ -385,19 +385,5 @@ Tickets booked for movie: AVATAR at: {OUTE220323=4}
 04-04-2023 00:48:43 : addMovieSlots : Movie- AVATAR Show at- ATWM040423 20 : Passed : 20 slots for movie AVATAR for movie ID ATWM040423 have been added.
 04-04-2023 00:51:21 : addMovieSlots : Movie- AVATAR Show at- ATWM040423 20 : Passed : 20 slots for movie AVATAR for movie ID ATWM040423 have been added.
 04-04-2023 00:53:18 : addMovieSlots : Movie- AVATAR Show at- ATWM040423 20 : Passed : 20 slots for movie AVATAR for movie ID ATWM040423 have been added.
-<<<<<<< HEAD
-05-04-2023 15:05:50 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-=======
 04-04-2023 10:34:03 : addMovieSlots : Movie- Avatar Show at- ATWM050423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM050423 have been added.
->>>>>>> d51c964221ddad9293a7363c8d1294b648d9ecc8
-05-04-2023 15:20:13 : addMovieSlots : Movie- Avatar Show at- ATWM050423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM050423 have been added.
-05-04-2023 15:31:43 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-05-04-2023 15:43:22 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-05-04-2023 15:53:55 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-05-04-2023 16:08:47 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-05-04-2023 16:20:04 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-05-04-2023 16:22:40 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-05-04-2023 16:31:56 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-05-04-2023 16:37:12 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-05-04-2023 16:44:27 : addMovieSlots : Movie- Avatar Show at- ATWM060423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM060423 have been added.
-05-04-2023 17:38:57 : addMovieSlots : Movie- AVATAR Show at- ATWM060423 100 : Passed : 100 slots for movie AVATAR for movie ID ATWM060423 have been added.
+05-04-2023 15:20:15 : addMovieSlots : Movie- Avatar Show at- ATWM050423 20 : Passed : 20 slots for movie Avatar for movie ID ATWM050423 have been added.
