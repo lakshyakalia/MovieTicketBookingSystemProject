@@ -66,6 +66,7 @@ public class MovieTicketService {
     public String addMovieSlots(String movieID, String movieName, int bookingCapacity){
         log = "Slots not added.";
         Status = "Failed";
+        System.out.println("called addMovieSlots");
 
         if(!movieMap.isEmpty() && movieMap.containsKey(movieName)){
             HashMap<String,Integer> temp = new HashMap<>();
@@ -83,7 +84,7 @@ public class MovieTicketService {
         log = "Slots added.";
         Status = "Passed";
         writeToLogFile("addMovieSlots","Movie- " + movieName+" Show at- "+movieID+" "+bookingCapacity,Status,bookingCapacity + " slots for movie " + movieName + " for movie ID " + movieID + " have been added.");
-        return "Movie Slot Added.";
+        return "Movie Slot Added_by Ankita.";
     }
     public String removeMovieSlots(String movieID, String movieName){
         log = "Slots not deleted.";
