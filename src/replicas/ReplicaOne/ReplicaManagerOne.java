@@ -85,7 +85,7 @@ public class ReplicaManagerOne {
                 else{
                     requestList.add(received);
                 }
-
+                System.out.println(response);
 
 
                 //Send Response to the frontend
@@ -99,8 +99,9 @@ public class ReplicaManagerOne {
                 oos.writeObject(response);
                 byte[] byteMessage = baos.toByteArray();
 
-                InetAddress ia=InetAddress.getLocalHost();
-                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaOnePort);
+                InetAddress ia=InetAddress.getByName("192.168.0.169");
+//                System.out.println(ia);
+                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaTwoPort);
                 toFrontEndSocket.send(packetToFrontend);
 
                 //Receive the update from the frontend about the response in case of Error
