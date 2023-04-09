@@ -26,7 +26,7 @@ public class Client  {
 //        System.out.println("This is a result "+frontendInterface.forwardMessageToSequencer("Hello Message"));
     }
     public static void startProg() throws ParseException, MalformedURLException {
-        URL url=new URL("http://localhost:8070/frontend?wsdl");
+        URL url=new URL("http://localhost:8071/frontend?wsdl");
         QName qName=new QName("http://frontend/","FrontendServiceService");
         Service service= Service.create(url,qName);
         FrontendInterface frontendInterface=service.getPort(FrontendInterface.class);

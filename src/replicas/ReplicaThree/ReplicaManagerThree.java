@@ -25,7 +25,7 @@ public class ReplicaManagerThree {
     public static Server_Interface movieRef;
     private static ArrayList<RequestObject> requestList=new ArrayList<>();
     public static void main(String[] args) throws IOException {
-git            System.out.println("Replica Manager Three Started");
+        System.out.println("Replica Manager Three Started");
             initializeServices();
             Thread thread = new Thread(new Runnable() {
                 public void run() {
@@ -107,17 +107,17 @@ git            System.out.println("Replica Manager Three Started");
                 oos.writeObject(response);
                 byte[] byteMessage = baos.toByteArray();
 
-                InetAddress ia=InetAddress.getByName("172.20.10.7");
+                InetAddress ia=InetAddress.getByName("localhost");
 //                System.out.println(ia);
-                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaTwoPort);
+                DatagramPacket packetToFrontend=new DatagramPacket(byteMessage,byteMessage.length,ia,Constants.listenReplicaThreePort);
                 toFrontEndSocket.send(packetToFrontend);
 
                 //Receive the update from the frontend about the response in case of Error
-                byte[] byteFromFrontend=new byte[1024];
-                DatagramPacket packetFromFrontend=new DatagramPacket(byteFromFrontend,byteFromFrontend.length);
-                toFrontEndSocket.receive(packetFromFrontend);
-                String checkString=new String(packetFromFrontend.getData()).trim();
-                checkErrorResponseFromFrontend(checkString);
+//                byte[] byteFromFrontend=new byte[1024];
+//                DatagramPacket packetFromFrontend=new DatagramPacket(byteFromFrontend,byteFromFrontend.length);
+//                toFrontEndSocket.receive(packetFromFrontend);
+//                String checkString=new String(packetFromFrontend.getData()).trim();
+//                checkErrorResponseFromFrontend(checkString);
 //              System.out.println("Final "+checkString);
             }
             multicastSocket.leaveGroup(group);
