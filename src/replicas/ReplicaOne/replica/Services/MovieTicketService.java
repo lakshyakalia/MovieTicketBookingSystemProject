@@ -66,6 +66,7 @@ public class MovieTicketService {
     public String addMovieSlots(String movieID, String movieName, int bookingCapacity){
         log = "Slots not added.";
         Status = "Failed";
+        System.out.println("called addMovieSlots");
 
         if(!movieMap.isEmpty() && movieMap.containsKey(movieName)){
             HashMap<String,Integer> temp = new HashMap<>();
